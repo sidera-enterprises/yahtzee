@@ -1,0 +1,17 @@
+X:\Sidera\Games\Yahtzee\Yahtzee\bin\Debug\Yahtzee.exe
+X:\Sidera\Games\Yahtzee\Yahtzee\bin\Debug\Yahtzee.pdb
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.AboutDialog.resources
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.CategoryDialog.resources
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.Die.resources
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.HelpForm.resources
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.LicenseDialog.resources
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.MainForm.resources
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.PlayerRoster.resources
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.ScoreSheet.resources
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.Properties.Resources.resources
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.ConfigDialog.resources
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.StartupDialog.resources
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.csproj.GenerateResource.Cache
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.exe
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.pdb
+X:\Sidera\Games\Yahtzee\Yahtzee\obj\Debug\Yahtzee.csprojResolveAssemblyReference.cache

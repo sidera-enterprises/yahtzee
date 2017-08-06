@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Yahtzee! Documentation</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <style>
+            html
+            {
+                padding: 0;
+            }
+
+            body
+            {
+                font-family: sans-serif;
+                padding: 0;
+            }
+            
+            div
+            {
+                border: 1px solid black;
+                padding: 0 1em;
+                margin: .5em 0;
+            }
+            
+            div.header
+            {
+                background-color: rgb(240, 240, 240);
+                border: 1px solid rgb(128, 128, 128);
+                text-align: center;
+            }
+            
+            div.getting-started
+            {
+                background-color: rgb(224, 255, 224);
+                border: 1px solid rgb(0, 192, 0);
+            }
+            
+            div.table-of-contents
+            {
+                background-color: rgb(224, 224, 255);
+                border: 1px solid rgb(0, 0, 192);
+            }
+            
+            div.gameplay
+            {
+                background-color: rgb(255, 240, 224);
+                border: 1px solid rgb(192, 128, 0);
+            }
+            
+            div.mit-license
+            {
+                background-color: rgb(255, 224, 224);
+                border: 1px solid rgb(192, 0, 0);
+            }
+            
+            a[href="#table-of-contents"]
+            {
+                display: block;
+                text-align: right;
+            }
+            
+            h1:not(:last-child),
+            p:not(:last-of-type),
+            ol:not(:last-child),
+            ul:not(:last-child)
+            {
+                border-bottom: inherit;
+                padding-bottom: .75em;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="header">
+            <h1>Yahtzee! Documentation</h1>
+            <p>Developed by Sidera Enterprises 2017</p>
+            <p>Based on the Hasbro dice game</p>
+        </div>
+        
+        <a name="table-of-contents"></a>
+        <div class="table-of-contents">
+            <h1>Table of Contents</h1>
+            <ol>
+                <li>
+                    <a href="#getting-started">
+                        Getting Started
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#getting-started-system-requirements">
+                                System Requirements
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#getting-started-overview">
+                                Overview
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#getting-started-objective">
+                                Objective
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#gameplay">
+                        Gameplay
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#gameplay-introduction">
+                                Introduction
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#gameplay-adding-removing-players">
+                                Adding/Removing Players
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#gameplay-turn-based-gameplay">
+                                Turn-Based Gameplay
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#gameplay-rolling-the-dice">
+                                Rolling the Dice
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#gameplay-category-selection">
+                                Category Selection
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#gameplay-scoring">
+                                Scoring
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#mit-license">
+                        MIT License
+                    </a>
+                </li>
+            </ol>
+        </div>
+        
+        <a name="getting-started"></a>
+        <div class="getting-started">
+            <!--GETTING STARTED-->
+            <h1>1. Getting Started</h1>
+            
+            <a name="getting-started-system-requirements"></a>
+            <h2>System Requirements</h2>
+            <ul>
+                <li>
+                    <b>Recommended specifications:</b>
+                    <ul>
+                        <li>
+                            Windows 7 or later with x64 (64-bit) CPU
+                            architecture
+                        </li>
+                        <li>
+                            1GHz or faster CPU
+                        </li>
+                        <li>
+                            At least 4GB RAM
+                        </li>
+                        <li>
+                            Microsoft .NET 4 (which is available for Windows XP
+                            SP3/Windows Server 2003 SP2 and later versions)
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <b>Minimum specifications:</b>
+                    <ul>
+                        <li>
+                            Windows XP SP3 or later with x86 (32-bit) or x64
+                            (64-bit) CPU architecture
+                        </li>
+                        <li>
+                            1GHz or faster x86/x64 CPU
+                        </li>
+                        <li>
+                            1GB RAM for x86-architecture systems <b>OR</b> at
+                            least 2GB RAM for x64-architecture systems
+                        </li>
+                        <li>
+                            Microsoft .NET 4
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <a name="getting-started-overview"></a>
+            <h2>Overview</h2>
+            <p>
+                <i>Yahtzee!</i> is a luck-strategy game in which players score
+                points by rolling a set of five six-sided dice.
+            </p>
+            
+            <a name="getting-started-objective"></a>
+            <h2>Objective</h2>
+            <p>
+                The objective is to score as many points as possible from the
+                dice combinations rolled. The player with the highest score at
+                the end of the game is the winner.
+            </p>
+            
+            <p><a href="#table-of-contents">&uarr; Table of Contents</a></p>
+        </div>
+        
+        <a name="gameplay"></a>
+        <div class="gameplay">
+            <!--GAMEPLAY-->
+            <h1>2. Gameplay</h1>
+            
+            <a name="gameplay-introduction"></a>
+            <h2>Introduction</h2>
+            <p>
+                <i>Yahtzee!</i> is a game that employs both chance and
+                strategy. By rolling a set of five cubic dice, it is up to you
+                how you wish to award your own points based on the combinations
+                you roll.
+            </p>
+            
+            <a name="gameplay-adding-removing-players"></a>
+            <h2>Adding/Removing Players</h2>
+            <p>
+                After you start the application, you will be greeted with a
+                dialog box in which you can create your player roster. This
+                roster will allow for you to add between 1 to 10 players. Each
+                player must be added with a unique screen name. To add a name
+                to the roster, press the [<b>+</b>] button to the right of the
+                input box; likewise, to remove a name, press the [<b>-</b>]
+                button. To begin the game, press the <b>Play!</b> button. The
+                application will then generate a score sheet and initialize a
+                new game for you.
+            </p>
+            
+            <p>
+                NOTE: It may take a moment to generate a score sheet. However,
+                the more players you add to your roster, the longer it will
+                take for the application to do so.
+            </p>
+            
+            <a name="gameplay-turn-based-gameplay"></a>
+            <h2>Turn-Based Gameplay</h2>
+            <p>
+                The score sheet will be displayed as a dual-axis table, with
+                the first five letters of each player's name displayed across
+                the first row (which we'll call the &quot;queue&quot;) and the
+                category labels displayed along the first column.
+            </p>
+            
+            <p>
+                A player's turn will be indicated by a light yellow column
+                beneath the currently active player's name on the score sheet.
+                Once the active player has used his/her turn, it will rotate
+                to the next player in the queue. After the last player in the
+                queue has used his/her turn, it will return to the first player
+                in the queue. This cycle will repeat until every player has
+                filled every category in his/her column, at which point the
+                game will declare the final winner(s).
+            </p>
+            
+            <a name="gameplay-rolling-the-dice"></a>
+            <h2>Rolling the Dice</h2>
+            <p>
+                For each turn, the active player will be given three
+                opportunities to roll the dice, of which five are provided.
+                <b>The number of rolls remaining will be indicated in the
+                caption of the <i>Roll Dice</i> button in the dice roller
+                toolbar at the top.</b>
+            </p>
+            
+            <p>
+                If you see a pattern respective to any of the categories you
+                are aiming to fill, you have the beneficial option to hold
+                dice to prevent them from being rolled. <b>You can hold or
+                unhold a die by clicking on it. A held die is indicated by
+                a blue background color with white dots, while an unheld die
+                is indicated by a white background with black dots.</b>
+            </p>
+            
+            <a name="gameplay-category-selection"></a>
+            <h2>Category Selection</h2>
+            <p>
+                Before concluding one's turn, a player must decide which
+                category to fill based on the dice value combination he/she
+                has rolled. Information on how to effectively choose a
+                category can be found in the
+                <a href="#gameplay-scoring">Scoring</a> section of the
+                documentation.
+            </p>
+            
+            <p>
+                You cannot select a category before using your first roll.
+                <b>Once you are ready to select a category or have exhausted
+                all your rolls, you can select a category by clicking the
+                <i>Category</i> button in the dice roller toolbar at the top.
+                A small dialog will appear with a dropdown list of all the
+                categories you have not yet used. Click OK to finalize your
+                selection.</b>
+            </p>
+            
+            <p>
+                If you are playing in a multiplayer setting, your turn will
+                rotate to the next player in the queue once you have selected
+                a category.
+            </p>
+            
+            <a name="gameplay-scoring"></a>
+            <h2>Scoring</h2>
+            <p>
+                Your score tally will depend on your dice value combination
+                and what category you select based on that combination. If
+                your selected category does not in any way relate to the
+                combination you have rolled, a score of zero (0) points will
+                be awarded to that category and you will not be able to use
+                that category again during the current game.
+            </p>
+            
+            <p>
+                The following information outlines how many points you can
+                earn from the categories you choose:
+            </p>
+            
+            <ul>
+                <li>
+                    <b><u>UPPER SECTION</u></b>
+                    <ul>
+                        <li>
+                            <b>ACES:</b>
+                            Adds one point for every 1 rolled.
+                        </li>
+                        <li>
+                            <b>TWOS:</b>
+                            Adds two points for every 2 rolled.
+                        </li>
+                        <li>
+                            <b>THREES:</b>
+                            Adds three points for every 3 rolled.
+                        </li>
+                        <li>
+                            <b>FOURS:</b>
+                            Adds four points for every 4 rolled.
+                        </li>
+                        <li>
+                            <b>FIVES:</b>
+                            Adds five points for every 5 rolled.
+                        </li>
+                        <li>
+                            <b>SIXES:</b>
+                            Adds six points for every 6 rolled.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <b><u>LOWER SECTION</u></b>
+                    <ul>
+                        <li>
+                            <b>3 OF A KIND:</b>
+                            Adds the total of all dice.
+                        </li>
+                        <li>
+                            <b>4 OF A KIND:</b>
+                            Adds the total of all dice.
+                        </li>
+                        <li>
+                            <b>FULL HOUSE:</b>
+                            Adds 25 points for a 2-of-a-kind and a
+                            3-of-a-kind.
+                        </li>
+                        <li>
+                            <b>SMALL STRAIGHT:</b>
+                            Adds 30 points for a sequence of 4.
+                        </li>
+                        <li>
+                            <b>LARGE STRAIGHT:</b>
+                            Adds 40 points for a sequence of 5.
+                        </li>
+                        <li>
+                            <b>YAHTZEE:</b>
+                            Adds 50 points for a 5-of-a-kind.*
+                        </li>
+                        <li>
+                            <b>CHANCE:</b>
+                            Adds the total of all dice.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <p>
+                <b>UPPER SECTION TOTAL:</b>
+                If you score 63 or more points in your Upper Score Subtotal,
+                an additional 35-point bonus will be awarded to your Upper
+                Score Total.
+            </p>
+
+            <p>
+                <b>LOWER SECTION TOTAL:</b>
+                * Per traditional game rules, for every subsequent Yahtzee you
+                  roll, an additional 100-point Yahtzee Bonus will be awarded
+                  to your Lower Section Total. However, Yahtzee Bonus is not
+                  currently available in this version of the software.
+            </p>
+            
+            <p><a href="#table-of-contents">&uarr; Table of Contents</a></p>
+        </div>
+        
+        <a name="mit-license"></a>
+        <div class="mit-license">
+            <!--MIT LICENSE-->
+            <h1>3. MIT License</h1>
+            
+            <p>
+                Copyright &copy; 2017 Sidera Enterprises.
+            </p>
+            
+            <p>
+                Permission is hereby granted, free of charge, to any person
+                obtaining a copy of this software and associated documentation
+                files (the &quot;Software&quot;), to deal in the Software
+                without restriction, including without limitation the rights to
+                use, copy, modify, merge, publish, distribute, sublicense,
+                and/or sell copies of the Software, and to permit persons to
+                whom the Software is furnished to do so, subject to the
+                following conditions:
+            </p>
+            
+            <p>
+                The above copyright notice and this permission notice shall be
+                included in all copies or substantial portions of the Software.
+            </p>
+            
+            <p>
+                THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF
+                ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+                WARRANTIES OF MERCHANTIBILITY, FITNESS FOR A PARTICULAR PURPOSE
+                AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+                HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+                WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+                FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+                OTHER DEALINGS WITH THE SOFTWARE.
+            </p>
+            
+            <p><a href="#table-of-contents">&uarr; Table of Contents</a></p>
+        </div>
+    </body>
+</html>
