@@ -284,7 +284,7 @@ namespace Yahtzee
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_exitOnClose && !GameOver())
+            if (_exitOnClose)
             {
                 string message = GameOver() ? "Would you like to play another game?"
                                             : "Are you sure you want to end the game?";
@@ -440,8 +440,10 @@ namespace Yahtzee
                             winnersString += "and " + winners[winners.Length - 1];
                         }
 
-                        message = winnersString + ((winners.Length > 1) ? " are tied with a final score of " + highScore + " points!"
-                                                                        : " is the winner, with a final score of " + highScore + " points!");
+                        message = winnersString + ((winners.Length > 1) ? " are tied"
+                                                                        : " is the winner");
+
+                        message += ", with a final score of " + highScore + " points!";
                     }
                     else
                     {
@@ -456,7 +458,11 @@ namespace Yahtzee
                                                         MessageBoxButtons.YesNo,
                                                         MessageBoxIcon.Information);
 
-                    if (drgo == DialogResult.Yes) Close();
+                    if (drgo == DialogResult.Yes)
+                    {
+                        _exitOnClose = false;
+                        Close();
+                    }
                 }
             }
         }
