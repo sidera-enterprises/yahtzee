@@ -535,6 +535,5 @@ namespace Yahtzee
             d.ShowDialog();
         }
         #endregion
-
     }
 }
