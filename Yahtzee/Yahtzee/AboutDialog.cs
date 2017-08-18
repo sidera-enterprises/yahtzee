@@ -25,7 +25,7 @@ namespace Yahtzee
             _version = Assembly.GetExecutingAssembly().GetName().Version;
             _major = _version.Major;
             _minor = _version.Minor;
-            _build = 170806;// _version.Build;
+            _build = _version.Build;
             
             lblAppVersion.Text = lblAppVersion.Text.Replace("v*.*",
                                                             "v" + _major + "." + _minor
