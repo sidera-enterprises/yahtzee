@@ -62,7 +62,7 @@ namespace Yahtzee
                 text = sr.ReadToEnd();
             } catch { text = "0"; }
 
-            double currentBuild = Double.Parse(_major + "." + _minor),
+            double currentBuild = _build,
                    latestBuild = Double.Parse(text);
 
             // Check if available build is newer than current build
