@@ -56,7 +56,7 @@ namespace Yahtzee
             try
             {
                 WebClient wc = new WebClient();
-                Stream s = wc.OpenRead("https://sidera.neocities.org/downloads/yahtzee/ver.txt");
+                Stream s = wc.OpenRead("https://raw.githubusercontent.com/sidera-enterprises/yahtzee/master/Yahtzee/Yahtzee/ver.txt");
                 StreamReader sr = new StreamReader(s);
 
                 text = sr.ReadToEnd();
@@ -71,7 +71,7 @@ namespace Yahtzee
                 DialogResult dr = MessageBox.Show("A new version of this application is "
                                                 + "available. Would you like to download "
                                                 + "it now?",
-                                                  "New Update Available",
+                                                  "",
                                                   MessageBoxButtons.YesNo,
                                                   MessageBoxIcon.Information);
 
@@ -82,7 +82,7 @@ namespace Yahtzee
             {
                 MessageBox.Show("No updates are available for this software at this time. "
                               + "Please try again later.",
-                                "No Update Available",
+                                "",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
             }

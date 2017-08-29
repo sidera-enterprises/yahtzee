@@ -66,7 +66,7 @@ namespace Yahtzee
                 {
                     string name = _players[i];
                     bool header = (j == 0);
-                    int length = 5;
+                    int length = 6;
 
                     pnlScoreTable.Controls.Add(new Label()
                     {

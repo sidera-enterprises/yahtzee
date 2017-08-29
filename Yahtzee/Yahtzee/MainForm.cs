@@ -12,6 +12,8 @@ namespace Yahtzee
     public partial class MainForm : Form
     {
         #region Initialization
+        private FileSystem _fs;
+
         private bool _exitOnClose;
 
         private Random _random;
@@ -27,6 +29,8 @@ namespace Yahtzee
         public MainForm(string[] players)
         {
             InitializeComponent();
+
+            _fs = new FileSystem("Yahtzee");
 
             _exitOnClose = true;
 
@@ -57,17 +61,6 @@ namespace Yahtzee
                                                          : "To begin, please roll the dice.";
 
             _scoreSheet.TurnChanged += ScoreSheet_TurnChanged;
-
-            //scoreSheet1.Margin = new Padding(3, 3, 3, 3 + mnuStatusBar.Height);
-
-            /*
-            ScoreSheet s = new ScoreSheet(new string[]
-            {
-                "P1", "P2", "P3", "P4"
-            });
-            pnlMain.Controls.Add(s);
-            s.Location = new Point(s.Margin.Left, s.Margin.Top);
-            */
         }
         #endregion
 
@@ -280,6 +273,14 @@ namespace Yahtzee
         {
             CenterControlInParent(pnlDiceLayout);
             CenterControlInParent(_scoreSheet);
+
+            /*
+            *** INCLUDE IN A FUTURE UPDATE ***
+            // Create directories
+            _fs.CreateDirectories();
+            if (!_fs.ConfigFileExists("highscore.txt"))
+                _fs.WriteConfigFile("highscore.txt", "0");
+            */
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

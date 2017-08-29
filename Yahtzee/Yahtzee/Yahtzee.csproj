@@ -77,6 +77,7 @@
     <Compile Include="Die.Designer.cs">
       <DependentUpon>Die.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileSystem.cs" />
     <Compile Include="HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,7 +162,6 @@
     <EmbeddedResource Include="StartupDialog.resx">
       <DependentUpon>StartupDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="bin\Debug\Yahtzee.vshost.exe.manifest" />
     <None Include="bin\Release\Yahtzee.vshost.exe.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -218,14 +218,12 @@
     <None Include="Resources\tag.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Yahtzee.exe" />
-    <Content Include="bin\Debug\Yahtzee.pdb" />
-    <Content Include="bin\Debug\Yahtzee.vshost.exe" />
     <Content Include="bin\Release\Yahtzee.exe" />
     <Content Include="bin\Release\Yahtzee.pdb" />
     <Content Include="bin\Release\Yahtzee.vshost.exe" />
     <Content Include="icon.ico" />
     <Content Include="help.html" />
+    <Content Include="ver.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
