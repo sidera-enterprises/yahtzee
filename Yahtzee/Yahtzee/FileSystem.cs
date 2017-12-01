@@ -10,8 +10,9 @@ namespace Yahtzee
 {
     class FileSystem
     {
-        public FileSystem(string appName) : this(Application.StartupPath, appName) { }
-        public FileSystem(string root, string appName)
+        public FileSystem() : this(Assembly.GetExecutingAssembly().GetName().Name) { }
+        private FileSystem(string appName) : this(Application.StartupPath, appName) { }
+        private FileSystem(string root, string appName)
         {
             RootDir = root;
             AppDir = RootDir + "\\Sidera\\" + appName;
@@ -60,9 +61,36 @@ namespace Yahtzee
             return File.Exists(RootDir + "\\" + filePath);
         }
 
+        public bool AppFileExists(string filePath)
+        {
+            return File.Exists(AppDir + "\\" + filePath);
+        }
+
         public bool ConfigFileExists(string filePath)
         {
             return File.Exists(ConfigDir + "\\" + filePath);
+        }
+
+        public bool WriteFile(string fileName, string contents)
+        {
+            try
+            {
+                File.WriteAllText(AppDir + "\\" + fileName, contents);
+
+                return true;
+            }
+            catch { return false; }
+        }
+
+        public bool WriteFile(string directory, string fileName, string contents)
+        {
+            try
+            {
+                File.WriteAllText(AppDir + "\\" + directory + "\\" + fileName, contents);
+
+                return true;
+            }
+            catch { return false; }
         }
 
         public bool WriteConfigFile(string fileName, string contents)
@@ -76,9 +104,25 @@ namespace Yahtzee
             catch { return false; }
         }
 
+        public string ReadFile(string directoryName, string fileName)
+        {
+            return File.ReadAllText(RootDir + "\\" + directoryName + "\\" + fileName);
+        }
+
         public string ReadConfigFile(string fileName)
         {
             return File.ReadAllText(ConfigDir + "\\" + fileName);
+        }
+
+        public bool DeleteFile(string directoryName, string fileName)
+        {
+            try
+            {
+                File.Delete(RootDir + "\\" + directoryName + "\\" + fileName);
+
+                return true;
+            }
+            catch { return false; }
         }
 
         public bool DeleteConfigFile(string fileName)

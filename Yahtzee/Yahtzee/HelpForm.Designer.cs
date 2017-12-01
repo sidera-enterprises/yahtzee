@@ -34,10 +34,10 @@
             this.mnuFile_Close = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlDocBorder = new System.Windows.Forms.Panel();
-            this.webHelpDoc = new System.Windows.Forms.WebBrowser();
+            this.pnlHelpDoc = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.mnuMenuBar.SuspendLayout();
-            this.pnlDocBorder.SuspendLayout();
+            this.pnlHelpDoc.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuMenuBar
@@ -83,35 +83,37 @@
             this.mnuHelp_About.Text = "&About Yahtzee!";
             this.mnuHelp_About.Click += new System.EventHandler(this.mnuHelp_About_Click);
             // 
-            // pnlDocBorder
+            // pnlHelpDoc
             // 
-            this.pnlDocBorder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlDocBorder.Controls.Add(this.webHelpDoc);
-            this.pnlDocBorder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDocBorder.Location = new System.Drawing.Point(0, 24);
-            this.pnlDocBorder.Name = "pnlDocBorder";
-            this.pnlDocBorder.Size = new System.Drawing.Size(480, 342);
-            this.pnlDocBorder.TabIndex = 1;
+            this.pnlHelpDoc.BackColor = System.Drawing.SystemColors.Window;
+            this.pnlHelpDoc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlHelpDoc.Controls.Add(this.tableLayoutPanel1);
+            this.pnlHelpDoc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlHelpDoc.Location = new System.Drawing.Point(0, 24);
+            this.pnlHelpDoc.Name = "pnlHelpDoc";
+            this.pnlHelpDoc.Padding = new System.Windows.Forms.Padding(6);
+            this.pnlHelpDoc.Size = new System.Drawing.Size(480, 342);
+            this.pnlHelpDoc.TabIndex = 1;
             // 
-            // webHelpDoc
+            // tableLayoutPanel1
             // 
-            this.webHelpDoc.AllowWebBrowserDrop = false;
-            this.webHelpDoc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webHelpDoc.IsWebBrowserContextMenuEnabled = false;
-            this.webHelpDoc.Location = new System.Drawing.Point(0, 0);
-            this.webHelpDoc.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webHelpDoc.Name = "webHelpDoc";
-            this.webHelpDoc.ScriptErrorsSuppressed = true;
-            this.webHelpDoc.Size = new System.Drawing.Size(476, 338);
-            this.webHelpDoc.TabIndex = 0;
-            this.webHelpDoc.WebBrowserShortcutsEnabled = false;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(-25, -72);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 100);
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // HelpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 366);
-            this.Controls.Add(this.pnlDocBorder);
+            this.Controls.Add(this.pnlHelpDoc);
             this.Controls.Add(this.mnuMenuBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mnuMenuBar;
@@ -121,7 +123,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.mnuMenuBar.ResumeLayout(false);
             this.mnuMenuBar.PerformLayout();
-            this.pnlDocBorder.ResumeLayout(false);
+            this.pnlHelpDoc.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,7 +136,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuFile_Close;
         private System.Windows.Forms.ToolStripMenuItem mnuHelp_About;
-        private System.Windows.Forms.Panel pnlDocBorder;
-        private System.Windows.Forms.WebBrowser webHelpDoc;
+        private System.Windows.Forms.Panel pnlHelpDoc;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

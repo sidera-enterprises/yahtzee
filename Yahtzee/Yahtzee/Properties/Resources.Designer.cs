@@ -19,7 +19,7 @@ namespace Yahtzee.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -123,6 +123,36 @@ namespace Yahtzee.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Check {
+            get {
+                object obj = ResourceManager.GetObject("Check", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CheckMark {
+            get {
+                object obj = ResourceManager.GetObject("CheckMark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Crash {
+            get {
+                object obj = ResourceManager.GetObject("Crash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DownArrow {
             get {
                 object obj = ResourceManager.GetObject("DownArrow", resourceCulture);
@@ -136,28 +166,69 @@ namespace Yahtzee.Properties {
         ///&lt;html&gt;
         ///    &lt;head&gt;
         ///        &lt;title&gt;Yahtzee! Documentation&lt;/title&gt;
+        ///        &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
         ///        
         ///        &lt;style&gt;
+        ///            html
+        ///            {
+        ///                padding: 0;
+        ///            }
+        ///
         ///            body
         ///            {
         ///                font-family: sans-serif;
+        ///                padding: 0;
         ///            }
         ///            
         ///            div
         ///            {
         ///                border: 1px solid black;
         ///                padding: 0 1em;
-        ///                margin: .5em 0;
-        ///            }
-        ///            
-        ///            div.header
-        ///            {
-        ///                background-color: rgba(128, 128, 128, .125);
-        ///                border: 1 [rest of string was truncated]&quot;;.
+        ///                m [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Help {
+        internal static string HelpManual {
             get {
-                return ResourceManager.GetString("Help", resourceCulture);
+                return ResourceManager.GetString("HelpManual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Manual {
+            get {
+                object obj = ResourceManager.GetObject("Manual", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pencil {
+            get {
+                object obj = ResourceManager.GetObject("Pencil", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Player {
+            get {
+                object obj = ResourceManager.GetObject("Player", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Robot {
+            get {
+                object obj = ResourceManager.GetObject("Robot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -184,9 +255,29 @@ namespace Yahtzee.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Splash {
+            get {
+                object obj = ResourceManager.GetObject("Splash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Tag {
             get {
                 object obj = ResourceManager.GetObject("Tag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TrashCan {
+            get {
+                object obj = ResourceManager.GetObject("TrashCan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -14,8 +14,6 @@ namespace Yahtzee
         public HelpForm()
         {
             InitializeComponent();
-
-            webHelpDoc.DocumentText = Properties.Resources.Help;
         }
 
         private void mnuFile_Close_Click(object sender, EventArgs e)

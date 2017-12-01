@@ -52,16 +52,19 @@
             this.pnlDiceLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.btnRollDice = new System.Windows.Forms.Button();
             this.btnSelectCategory = new System.Windows.Forms.Button();
+            this.pnlDashboard = new System.Windows.Forms.Panel();
+            this.pnlOtherControls = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnHelp = new System.Windows.Forms.Button();
             this.die1 = new Yahtzee.Die();
             this.die2 = new Yahtzee.Die();
             this.die3 = new Yahtzee.Die();
             this.die4 = new Yahtzee.Die();
             this.die5 = new Yahtzee.Die();
-            this.pnlDashboard = new System.Windows.Forms.Panel();
             this.mnuMenuBar.SuspendLayout();
             this.mnuStatusBar.SuspendLayout();
             this.pnlDiceLayout.SuspendLayout();
             this.pnlDashboard.SuspendLayout();
+            this.pnlOtherControls.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuMenuBar
@@ -72,9 +75,9 @@
             this.mnuHelp});
             this.mnuMenuBar.Location = new System.Drawing.Point(0, 0);
             this.mnuMenuBar.Name = "mnuMenuBar";
-            this.mnuMenuBar.Padding = new System.Windows.Forms.Padding(0);
+            this.mnuMenuBar.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.mnuMenuBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.mnuMenuBar.Size = new System.Drawing.Size(596, 24);
+            this.mnuMenuBar.Size = new System.Drawing.Size(684, 24);
             this.mnuMenuBar.TabIndex = 0;
             // 
             // mnuGame
@@ -90,7 +93,7 @@
             this.mnuGame_sep3,
             this.mnuGame_Exit});
             this.mnuGame.Name = "mnuGame";
-            this.mnuGame.Size = new System.Drawing.Size(50, 24);
+            this.mnuGame.Size = new System.Drawing.Size(50, 22);
             this.mnuGame.Text = "&Game";
             // 
             // mnuGame_New
@@ -176,7 +179,7 @@
             this.mnuHelp_sep1,
             this.mnuHelp_About});
             this.mnuHelp.Name = "mnuHelp";
-            this.mnuHelp.Size = new System.Drawing.Size(44, 24);
+            this.mnuHelp.Size = new System.Drawing.Size(44, 22);
             this.mnuHelp.Text = "&Help";
             // 
             // mnuHelp_Help
@@ -215,10 +218,9 @@
             // 
             this.mnuStatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatusMessage});
-            this.mnuStatusBar.Location = new System.Drawing.Point(0, 439);
+            this.mnuStatusBar.Location = new System.Drawing.Point(0, 539);
             this.mnuStatusBar.Name = "mnuStatusBar";
-            this.mnuStatusBar.Size = new System.Drawing.Size(596, 22);
-            this.mnuStatusBar.SizingGrip = false;
+            this.mnuStatusBar.Size = new System.Drawing.Size(684, 22);
             this.mnuStatusBar.TabIndex = 3;
             // 
             // lblStatusMessage
@@ -245,12 +247,11 @@
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 92);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(596, 347);
+            this.pnlMain.Size = new System.Drawing.Size(684, 447);
             this.pnlMain.TabIndex = 2;
             // 
             // pnlDiceLayout
             // 
-            this.pnlDiceLayout.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlDiceLayout.AutoSize = true;
             this.pnlDiceLayout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlDiceLayout.Controls.Add(this.btnRollDice);
@@ -264,7 +265,7 @@
             this.pnlDiceLayout.Margin = new System.Windows.Forms.Padding(0);
             this.pnlDiceLayout.Name = "pnlDiceLayout";
             this.pnlDiceLayout.Size = new System.Drawing.Size(476, 68);
-            this.pnlDiceLayout.TabIndex = 1;
+            this.pnlDiceLayout.TabIndex = 0;
             // 
             // btnRollDice
             // 
@@ -285,7 +286,8 @@
             // btnSelectCategory
             // 
             this.btnSelectCategory.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSelectCategory.Image = global::Yahtzee.Properties.Resources.Tag;
+            this.btnSelectCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelectCategory.Image = global::Yahtzee.Properties.Resources.Check;
             this.btnSelectCategory.Location = new System.Drawing.Point(69, 1);
             this.btnSelectCategory.Margin = new System.Windows.Forms.Padding(1);
             this.btnSelectCategory.MaximumSize = new System.Drawing.Size(66, 66);
@@ -293,10 +295,49 @@
             this.btnSelectCategory.Name = "btnSelectCategory";
             this.btnSelectCategory.Size = new System.Drawing.Size(66, 66);
             this.btnSelectCategory.TabIndex = 1;
-            this.btnSelectCategory.Text = "Category";
+            this.btnSelectCategory.Text = "Submit";
             this.btnSelectCategory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSelectCategory.UseVisualStyleBackColor = true;
             this.btnSelectCategory.Click += new System.EventHandler(this.btnSelectCategory_Click);
+            // 
+            // pnlDashboard
+            // 
+            this.pnlDashboard.AutoSize = true;
+            this.pnlDashboard.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlDashboard.Controls.Add(this.pnlOtherControls);
+            this.pnlDashboard.Controls.Add(this.pnlDiceLayout);
+            this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlDashboard.Location = new System.Drawing.Point(0, 24);
+            this.pnlDashboard.Name = "pnlDashboard";
+            this.pnlDashboard.Size = new System.Drawing.Size(684, 68);
+            this.pnlDashboard.TabIndex = 1;
+            // 
+            // pnlOtherControls
+            // 
+            this.pnlOtherControls.AutoSize = true;
+            this.pnlOtherControls.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlOtherControls.Controls.Add(this.btnHelp);
+            this.pnlOtherControls.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlOtherControls.Location = new System.Drawing.Point(616, 0);
+            this.pnlOtherControls.Name = "pnlOtherControls";
+            this.pnlOtherControls.Size = new System.Drawing.Size(68, 68);
+            this.pnlOtherControls.TabIndex = 1;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
+            this.btnHelp.Location = new System.Drawing.Point(1, 1);
+            this.btnHelp.Margin = new System.Windows.Forms.Padding(1);
+            this.btnHelp.MaximumSize = new System.Drawing.Size(66, 66);
+            this.btnHelp.MinimumSize = new System.Drawing.Size(66, 33);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(66, 66);
+            this.btnHelp.TabIndex = 0;
+            this.btnHelp.Text = "Help (F1)";
+            this.btnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnHelp.UseVisualStyleBackColor = true;
+            this.btnHelp.Click += new System.EventHandler(this.mnuHelp_Help_Click);
             // 
             // die1
             // 
@@ -353,40 +394,27 @@
             this.die5.TabIndex = 6;
             this.die5.Value = 0;
             // 
-            // pnlDashboard
-            // 
-            this.pnlDashboard.AutoSize = true;
-            this.pnlDashboard.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlDashboard.Controls.Add(this.pnlDiceLayout);
-            this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlDashboard.Location = new System.Drawing.Point(0, 24);
-            this.pnlDashboard.Name = "pnlDashboard";
-            this.pnlDashboard.Size = new System.Drawing.Size(596, 68);
-            this.pnlDashboard.TabIndex = 1;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(596, 461);
+            this.ClientSize = new System.Drawing.Size(684, 561);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlScoreBoard);
             this.Controls.Add(this.mnuStatusBar);
             this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.mnuMenuBar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mnuMenuBar;
-            this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1000, 562);
-            this.MinimumSize = new System.Drawing.Size(500, 500);
+            this.MinimumSize = new System.Drawing.Size(700, 600);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Yahtzee!";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.mnuMenuBar.ResumeLayout(false);
             this.mnuMenuBar.PerformLayout();
             this.mnuStatusBar.ResumeLayout(false);
@@ -394,6 +422,7 @@
             this.pnlDiceLayout.ResumeLayout(false);
             this.pnlDashboard.ResumeLayout(false);
             this.pnlDashboard.PerformLayout();
+            this.pnlOtherControls.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -430,6 +459,8 @@
         private Die die5;
         private System.Windows.Forms.Button btnSelectCategory;
         private System.Windows.Forms.Panel pnlDashboard;
+        private System.Windows.Forms.FlowLayoutPanel pnlOtherControls;
+        private System.Windows.Forms.Button btnHelp;
     }
 }
 

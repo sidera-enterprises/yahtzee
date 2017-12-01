@@ -19,6 +19,7 @@ namespace Yahtzee
         private Random _random;
         private Die[] _dice;
 
+        private string[] _players;
         private ScoreSheet _scoreSheet;
 
         private int _rolls;
@@ -30,20 +31,22 @@ namespace Yahtzee
         {
             InitializeComponent();
 
-            _fs = new FileSystem("Yahtzee");
+            _fs = new FileSystem();
 
             _exitOnClose = true;
 
             _random = new Random();
             _dice = new Die[] { die1, die2, die3, die4, die5 };
 
-            _scoreSheet = new ScoreSheet(players);
+            _players = players;
+
+            //_yahtzeesRolled = 0;
+            
+            _scoreSheet = new ScoreSheet(_players);
             pnlMain.Controls.Add(_scoreSheet);
             _scoreSheet.Margin = new Padding(3);
             _scoreSheet.Location = new Point(_scoreSheet.Margin.Left,
                                              _scoreSheet.Margin.Top);
-
-            //_yahtzeesRolled = 0;
 
             _categories = new List<string>[_scoreSheet.Players.Length];
             for (int i = 0; i < _categories.Length; i++)
@@ -55,10 +58,10 @@ namespace Yahtzee
             }
 
             InitializeRolls();
-            lblStatusMessage.Text = (players.Length > 1) ? "Okay, " + _scoreSheet.CurrentPlayer
-                                                         + ", it's your turn. To begin, please "
-                                                         + "roll the dice."
-                                                         : "To begin, please roll the dice.";
+            lblStatusMessage.Text = (_players.Length > 1) ? "Okay, " + _scoreSheet.CurrentPlayer
+                                                          + ", it's your turn. To begin, please "
+                                                          + "roll the dice."
+                                                          : "To begin, please roll the dice.";
 
             _scoreSheet.TurnChanged += ScoreSheet_TurnChanged;
         }
@@ -98,10 +101,10 @@ namespace Yahtzee
 
             lblStatusMessage.Text = (_rolls > 0) ? "You now have " + _rolls + " "
                                                  + (_rolls == 1 ? "roll" : "rolls") + " "
-                                                 + "left. You can roll again or select "
-                                                 + "a category."
-                                                 : "You are out of rolls. Please select "
-                                                 + "a category.";
+                                                 + "left. You can roll again or click "
+                                                 + "Submit to select a category."
+                                                 : "You are out of rolls. Please click "
+                                                 + "Submit to select a category.";
         }
 
         //
@@ -271,7 +274,14 @@ namespace Yahtzee
         #region Private events
         private void MainForm_Load(object sender, EventArgs e)
         {
-            CenterControlInParent(pnlDiceLayout);
+            //CenterControlInParent(pnlDiceLayout);
+
+            //Hide();
+
+            //Show();
+
+            //
+
             CenterControlInParent(_scoreSheet);
 
             /*
@@ -283,11 +293,37 @@ namespace Yahtzee
             */
         }
 
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            try
+            {
+                //CenterControlInParent(pnlDiceLayout);
+                CenterControlInParent(_scoreSheet);
+            } catch { /* Do nothing if unable to handle this event */ }
+        }
+
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_exitOnClose)
             {
-                string message = GameOver() ? "Would you like to play another game?"
+                string message = GameOver() ? "Are you sure you don't want to play "
+                                            + "another round?"
+                                            : "Are you sure you want to leave the "
+                                            + "game?";
+
+                DialogResult dr = MessageBox.Show(message,
+                                                  "",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Question);
+
+                // Refuse to close if that is what the user does
+                // not want
+                e.Cancel = (!GameOver() && dr == DialogResult.No);
+                // Shut down the program if the user wants to
+                // leave the game
+                if (dr == DialogResult.Yes) Program.Exit();
+
+                /*string message = GameOver() ? "Would you like to play another game?"
                                             : "Are you sure you want to end the game?";
 
                 DialogResult dr = MessageBox.Show(message,
@@ -304,6 +340,7 @@ namespace Yahtzee
                 // Program.cs:Exit() method)
                 if ((!GameOver() && dr == DialogResult.Yes) ||
                     (GameOver() && dr == DialogResult.No)) Program.Exit();
+                    */
             }
         }
 
@@ -479,6 +516,7 @@ namespace Yahtzee
 
         private void mnuGame_New_Click(object sender, EventArgs e)
         {
+            _exitOnClose = false;
             if (!GameOver())
             {
                 DialogResult dr = MessageBox.Show("Are you sure you want "
@@ -487,17 +525,9 @@ namespace Yahtzee
                                                   MessageBoxButtons.YesNo,
                                                   MessageBoxIcon.Question);
 
-                if (dr == DialogResult.Yes)
-                {
-                    _exitOnClose = false;
-                    Close();
-                }
+                if (dr == DialogResult.Yes) Close();
             }
-            else
-            {
-                _exitOnClose = false;
-                Close();
-            }
+            else Close();
         }
 
         private void mnuGame_Load_Click(object sender, EventArgs e)
@@ -527,8 +557,10 @@ namespace Yahtzee
 
         private void mnuHelp_Help_Click(object sender, EventArgs e)
         {
-            HelpForm f = new HelpForm();
-            f.Show();
+            if (!_fs.AppFileExists("help.html"))
+                _fs.WriteFile("help.html", Properties.Resources.HelpManual);
+
+            System.Diagnostics.Process.Start(_fs.AppDir + "\\help.html");
         }
 
         private void mnuHelp_Rules_Click(object sender, EventArgs e)
@@ -540,6 +572,11 @@ namespace Yahtzee
         {
             AboutDialog d = new AboutDialog();
             d.ShowDialog();
+        }
+
+        private void HelpForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            mnuHelp_Help.Enabled = btnHelp.Enabled = true;
         }
         #endregion
     }

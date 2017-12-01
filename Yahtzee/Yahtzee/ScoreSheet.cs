@@ -29,6 +29,8 @@ namespace Yahtzee
         {
             InitializeComponent();
 
+            Font = new Font("Consolas", 12F);
+
             // Create/initialize local variables
 
             // Initialize class-scope variables
@@ -66,7 +68,7 @@ namespace Yahtzee
                 {
                     string name = _players[i];
                     bool header = (j == 0);
-                    int length = 6;
+                    //int length = 12;
 
                     pnlScoreTable.Controls.Add(new Label()
                     {
@@ -75,8 +77,8 @@ namespace Yahtzee
                         BorderStyle = header ? BorderStyle.None : BorderStyle.Fixed3D,
                         Dock = header ? DockStyle.None : DockStyle.Fill,
                         Margin = new Padding(header ? 3 : 0),
-                        MinimumSize = new Size(header ? 0 : 60, 0),
-                        Text = header ? name.ToUpper().Substring(0, (name.Length < length) ? name.Length : length) : "",
+                        MinimumSize = new Size(header ? 0 : 120, 0),
+                        Text = header ? name.ToUpper() : "", //.ToUpper().Substring(0, (name.Length < length) ? name.Length : length) : "",
                         TextAlign = ContentAlignment.MiddleRight
                     }, 2 + i, j);
                 }
@@ -546,12 +548,15 @@ namespace Yahtzee
                        down = new PictureBox(),
                        sigma = new PictureBox();
 
+            up.Anchor = AnchorStyles.None;
             up.Image = Properties.Resources.UpArrow;
             up.SizeMode = PictureBoxSizeMode.AutoSize;
 
+            down.Anchor = AnchorStyles.None;
             down.Image = Properties.Resources.DownArrow;
             down.SizeMode = PictureBoxSizeMode.AutoSize;
 
+            sigma.Anchor = AnchorStyles.None;
             sigma.Image = Properties.Resources.Sigma;
             sigma.SizeMode = PictureBoxSizeMode.AutoSize;
 
@@ -598,7 +603,7 @@ namespace Yahtzee
             {
                 c.Margin = new Padding(1);
                 c.MinimumSize = new Size(0, 16);
-
+                
                 if (c is Label)
                 {
                     Label l = c as Label;
@@ -615,12 +620,22 @@ namespace Yahtzee
 
         private void HighlightPlayerWithTurn()
         {
-            for (int i = 1; i <= pnlScoreTable.RowCount; i++)
+            // Highlight the column representing the current player's
+            // individual score sheet
+            for (int i = 0; i < pnlScoreTable.RowCount; i++)
             {
                 for (int j = 0; j < pnlScoreTable.ColumnCount - 2; j++)
                 {
-                    pnlScoreTable.GetControlFromPosition(2 + j, i).BackColor = (j == _turn) ? TurnColor
-                                                                                            : SystemColors.Control;
+                    Control header = pnlScoreTable.GetControlFromPosition(2 + j, 0),
+                            cell = pnlScoreTable.GetControlFromPosition(2 + j, i + 1);
+
+                    header.Font = new Font(header.Font, (j == _turn) ? FontStyle.Bold
+                                                                     : FontStyle.Regular);
+
+                    //header.ForeColor = (j == _turn) ? Color.Red : SystemColors.ControlText;
+
+                    cell.BackColor = (j == _turn) ? TurnColor : SystemColors.Control;
+                    cell.ForeColor = (j == _turn) ? Color.Black : SystemColors.WindowText;
                 }
             }
         }

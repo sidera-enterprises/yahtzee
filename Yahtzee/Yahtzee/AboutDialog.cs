@@ -15,21 +15,12 @@ namespace Yahtzee
 {
     public partial class AboutDialog : Form
     {
-        private Version _version;
-        private int _major, _minor, _build;
-
         public AboutDialog()
         {
             InitializeComponent();
-
-            _version = Assembly.GetExecutingAssembly().GetName().Version;
-            _major = _version.Major;
-            _minor = _version.Minor;
-            _build = _version.Build;
             
             lblAppVersion.Text = lblAppVersion.Text.Replace("v*.*",
-                                                            "v" + _major + "." + _minor
-                                                          + " beta build " + _build);
+                                                            "v" + AppVersionInfo.VersionMajorMinorBuild);
 
             btnClose.Select();
         }
@@ -62,7 +53,7 @@ namespace Yahtzee
                 text = sr.ReadToEnd();
             } catch { text = "0"; }
 
-            double currentBuild = _build,
+            double currentBuild = AppVersionInfo.Build,
                    latestBuild = Double.Parse(text);
 
             // Check if available build is newer than current build

@@ -23,6 +23,12 @@
                 padding: 0 1em;
                 margin: .5em 0;
             }
+
+            div div
+            {
+                background-color: rgba(255, 255, 255, 128);
+                border: inherit;
+            }
             
             div.header
             {
@@ -48,11 +54,17 @@
                 background-color: rgb(255, 240, 224);
                 border: 1px solid rgb(192, 128, 0);
             }
-            
-            div.mit-license
+
+            div.error-logging
             {
                 background-color: rgb(255, 224, 224);
                 border: 1px solid rgb(192, 0, 0);
+            }
+            
+            div.mit-license
+            {
+                background-color: rgb(255, 224, 255);
+                border: 1px solid rgb(192, 0, 192);
             }
             
             a[href="#table-of-contents"]
@@ -70,6 +82,13 @@
                 padding-bottom: .75em;
             }
         </style>
+
+        <script>
+            function setDisplay(id, display)
+            {
+                document.getElementById(id).style.display = display;
+            }
+        </script>
     </head>
     
     <body>
@@ -143,6 +162,11 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#error-logging">
+                        Error Logging
+                    </a>
+                </li>
+                <li>
                     <a href="#mit-license">
                         MIT License
                     </a>
@@ -201,7 +225,7 @@
             <a name="getting-started-overview"></a>
             <h2>Overview</h2>
             <p>
-                <i>Yahtzee!</i> is a luck-strategy game in which players score
+                <i>Yahtzee!</i> is a luck/strategy game in which players score
                 points by rolling a set of five six-sided dice.
             </p>
             
@@ -225,7 +249,7 @@
             <h2>Introduction</h2>
             <p>
                 <i>Yahtzee!</i> is a game that employs both chance and
-                strategy. By rolling a set of five cubic dice, it is up to you
+                strategy. By rolling a set of five 6-sided dice, it is up to you
                 how you wish to award your own points based on the combinations
                 you roll.
             </p>
@@ -233,28 +257,98 @@
             <a name="gameplay-adding-removing-players"></a>
             <h2>Adding/Removing Players</h2>
             <p>
-                After you start the application, you will be greeted with a
-                dialog box in which you can create your player roster. This
-                roster will allow for you to add between 1 to 10 players. Each
-                player must be added with a unique screen name. To add a name
-                to the roster, press the [<b>+</b>] button to the right of the
-                input box; likewise, to remove a name, press the [<b>-</b>]
-                button. To begin the game, press the <b>Play!</b> button. The
-                application will then generate a score sheet and initialize a
-                new game for you.
+                After starting the application and the splash screen has
+                disappeared, you will be greeted with a dialog box with
+                a welcome message and an instruction to add all players who
+                will play the round. To do so, you must click the large plus
+                <b>[+]</b> button on the lower-right side of the dialog box.
+                Each player must be entered with a unique name, each of which
+                may be up to 15 characters in length, and, due to performance
+                limitations (see below for details) up to four players may
+                play in each round. Once you are satisfied with your roster,
+                you may begin playing by clicking the <b>Play!</b> button.
+                Once you do so, the program will generate a score sheet
+                containing score slots for every player entered in the roster.
+                Generating the score sheet may take a moment, depending on
+                the size of the roster and the overall performance of your
+                system.
+                <a id="techie-details" href="javascript:setDisplay('big-o', 'block');setDisplay('techie-details', 'none');">
+                    Performance details for nerds
+                </a>
             </p>
-            
+
+            <div id="big-o" style="display: none; font-style: italic;">
+                <p>
+                    The roster size limit is set to 4 due to a linear
+                    time-efficiency, <b>O(N)</b>.
+                </p>
+
+                <p>
+                    <b>What does this mean?</b>
+                    Here's a tidbit of information about this notation:
+                    
+                    <br><br>
+
+                    Let <b>n</b> represent the number of players in the
+                    roster. For each player added to the roster, <b>m</b> blank
+                    cells are generated in the score sheet, where <b>m</b> is a
+                    constant value corresponding to the number of category labels
+                    as displayed along the first column of the data table.
+                    Since <b>n</b> is a variable and <b>m</b> is a constant, the
+                    function representing the time-efficiency of the score sheet
+                    initialization process is linear, with a slope of <b>m</b>.
+                    The function can be represented as <b>y = mn</b>, which is
+                    represented in Big-O notation as <b>O(N)</b>.
+                </p>
+
+                <p>
+                    Sorry if this explanation bored you out of your wits. Please do
+                    go on to the next part :)
+                </p>
+            </div>
+
             <p>
-                NOTE: It may take a moment to generate a score sheet. However,
-                the more players you add to your roster, the longer it will
-                take for the application to do so.
+                The following information outlines action events supported in
+                the roster section of the dialog box:
             </p>
+
+            <ul>
+                <li>
+                    <b><u>MOUSE EVENTS:</u></b>
+                    <ul>
+                        <li>
+                            <b>CLICKING-AND-DRAGGING UNPOPULATED AREA:</b>
+                            Allows &quot;lasso&quot; selection for multiple items
+                            listed in the roster box.
+                        </li>
+                        <li>
+                            <b>DOUBLE-CLICKING ITEMS:</b>
+                            Allows renaming of players added to the roster.
+                        </li>
+                        <li>
+                            <b>RIGHT-CLICKING ITEMS:</b>
+                            Displays a context menu containing an option to
+                            Rename the selected entry (if only one is selected)
+                            and to Delete all selected entries in the roster.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <b><u>KEYBOARD EVENTS:</u></b>
+                    <ul>
+                        <li>
+                            <b>DELETE KEY:</b>
+                            Deletes all selected player entries in the roster.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
             
             <a name="gameplay-turn-based-gameplay"></a>
             <h2>Turn-Based Gameplay</h2>
             <p>
                 The score sheet will be displayed as a dual-axis table, with
-                the first five letters of each player's name displayed across
+                the first 15 letters of each player's name displayed across
                 the first row (which we'll call the &quot;queue&quot;) and the
                 category labels displayed along the first column.
             </p>
@@ -267,7 +361,8 @@
                 queue has used his/her turn, it will return to the first player
                 in the queue. This cycle will repeat until every player has
                 filled every category in his/her column, at which point the
-                game will declare the final winner(s).
+                game will end and the application will declare the final
+                winner(s).
             </p>
             
             <a name="gameplay-rolling-the-dice"></a>
@@ -294,8 +389,9 @@
             <p>
                 Before concluding one's turn, a player must decide which
                 category to fill based on the dice value combination he/she
-                has rolled. Information on how to effectively choose a
-                category can be found in the
+                has rolled, even if the dice combination does not match any
+                available category. More information on how to effectively
+                choose a category can be found in the
                 <a href="#gameplay-scoring">Scoring</a> section of the
                 documentation.
             </p>
@@ -304,7 +400,7 @@
                 You cannot select a category before using your first roll.
                 <b>Once you are ready to select a category or have exhausted
                 all your rolls, you can select a category by clicking the
-                <i>Category</i> button in the dice roller toolbar at the top.
+                <i>Submit</i> button in the dice roller toolbar at the top.
                 A small dialog will appear with a dropdown list of all the
                 categories you have not yet used. Click OK to finalize your
                 selection.</b>
@@ -323,8 +419,8 @@
                 and what category you select based on that combination. If
                 your selected category does not in any way relate to the
                 combination you have rolled, a score of zero (0) points will
-                be awarded to that category and you will not be able to use
-                that category again during the current game.
+                be awarded to that category. Each category can only be used
+                once per player per round.
             </p>
             
             <p>
@@ -367,11 +463,13 @@
                     <ul>
                         <li>
                             <b>3 OF A KIND:</b>
-                            Adds the total of all dice.
+                            Adds the total of all dice, if at
+                            least 3 dice show the same value.
                         </li>
                         <li>
                             <b>4 OF A KIND:</b>
-                            Adds the total of all dice.
+                            Adds the total of all dice, if at
+                            least 4 dice show the same value.
                         </li>
                         <li>
                             <b>FULL HOUSE:</b>
@@ -392,7 +490,8 @@
                         </li>
                         <li>
                             <b>CHANCE:</b>
-                            Adds the total of all dice.
+                            Wildcard category. Adds the total of
+                            all dice, regardless of values rolled.
                         </li>
                     </ul>
                 </li>
@@ -415,11 +514,50 @@
             
             <p><a href="#table-of-contents">&uarr; Table of Contents</a></p>
         </div>
+
+        <a name="error-logging"></a>
+        <div class="error-logging">
+            <h1>3. Error Logging</h1>
+
+            <p>
+                Albeit rare, there may be some occasions in which the
+                application may encounter a fatal error and crash thereafter.
+                For instance, because the application attempts to read and
+                write data to the disk on which it is running, it may, for
+                example, crash in the event that the disk is read-only (such
+                as on an SD card with the switch set to read-only mode), out
+                of space, suddenly removed from the host system (if the
+                storage device is external), or saving to a location where
+                write access is restricted due to lack of
+                administrator/superuser privileges.
+            </p>
+
+            <p>
+                In the event of an unhandled program error, the application
+                will display a dialog explaining that the application has
+                crashed and will show technical details describing the
+                cause of the error (this may be useful information for
+                developers). You will be given 20 seconds by default to
+                either Restart the application or Terminate it, after which
+                the application will automatically attempt to restart. You
+                may disable the countdown timer by unchecking the <b>Restart
+                automatically</b> checkbox if you wish to keep it open.
+            </p>
+
+            <p>
+                Should you ever be presented with the error dialog, it will
+                generate an error log and save it within the local directory
+                where the executable is located, under
+                <b>\Sidera\Yahtzee\logs</b>. The file will be named with the
+                format <b>errorlogYYYYMMDDHHMMSS.txt</b>, with
+                <b>YYYYMMDDHHMMSS</b> being the error log's timestamp.
+            </p>
+        </div>
         
         <a name="mit-license"></a>
         <div class="mit-license">
             <!--MIT LICENSE-->
-            <h1>3. MIT License</h1>
+            <h1>4. MIT License</h1>
             
             <p>
                 Copyright &copy; 2017 Sidera Enterprises.
