@@ -50,26 +50,27 @@
             this.pnlScoreBoard = new System.Windows.Forms.Panel();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlDiceLayout = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnRollDice = new System.Windows.Forms.Button();
+            this.die5 = new Yahtzee.Die();
+            this.die4 = new Yahtzee.Die();
+            this.die3 = new Yahtzee.Die();
+            this.die2 = new Yahtzee.Die();
+            this.die1 = new Yahtzee.Die();
             this.btnSelectCategory = new System.Windows.Forms.Button();
-            this.pnlDashboard = new System.Windows.Forms.Panel();
+            this.btnRollDice = new System.Windows.Forms.Button();
             this.pnlOtherControls = new System.Windows.Forms.FlowLayoutPanel();
             this.btnHelp = new System.Windows.Forms.Button();
-            this.die1 = new Yahtzee.Die();
-            this.die2 = new Yahtzee.Die();
-            this.die3 = new Yahtzee.Die();
-            this.die4 = new Yahtzee.Die();
-            this.die5 = new Yahtzee.Die();
+            this.pnlDashboard = new System.Windows.Forms.Panel();
+            this.lblDiv = new System.Windows.Forms.Label();
             this.mnuMenuBar.SuspendLayout();
             this.mnuStatusBar.SuspendLayout();
             this.pnlDiceLayout.SuspendLayout();
-            this.pnlDashboard.SuspendLayout();
             this.pnlOtherControls.SuspendLayout();
+            this.pnlDashboard.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuMenuBar
             // 
-            this.mnuMenuBar.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.mnuMenuBar.BackColor = System.Drawing.SystemColors.Window;
             this.mnuMenuBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuGame,
             this.mnuHelp});
@@ -245,9 +246,9 @@
             this.pnlMain.BackColor = System.Drawing.Color.Green;
             this.pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(0, 92);
+            this.pnlMain.Location = new System.Drawing.Point(0, 94);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(684, 447);
+            this.pnlMain.Size = new System.Drawing.Size(684, 445);
             this.pnlMain.TabIndex = 2;
             // 
             // pnlDiceLayout
@@ -267,21 +268,60 @@
             this.pnlDiceLayout.Size = new System.Drawing.Size(476, 68);
             this.pnlDiceLayout.TabIndex = 0;
             // 
-            // btnRollDice
+            // die5
             // 
-            this.btnRollDice.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRollDice.Image = global::Yahtzee.Properties.Resources.Roll;
-            this.btnRollDice.Location = new System.Drawing.Point(1, 1);
-            this.btnRollDice.Margin = new System.Windows.Forms.Padding(1);
-            this.btnRollDice.MaximumSize = new System.Drawing.Size(66, 66);
-            this.btnRollDice.MinimumSize = new System.Drawing.Size(66, 33);
-            this.btnRollDice.Name = "btnRollDice";
-            this.btnRollDice.Size = new System.Drawing.Size(66, 66);
-            this.btnRollDice.TabIndex = 0;
-            this.btnRollDice.Text = "Roll";
-            this.btnRollDice.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRollDice.UseVisualStyleBackColor = true;
-            this.btnRollDice.Click += new System.EventHandler(this.btnRollDice_Click);
+            this.die5.Checked = false;
+            this.die5.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die5.Location = new System.Drawing.Point(409, 1);
+            this.die5.Margin = new System.Windows.Forms.Padding(1);
+            this.die5.Name = "die5";
+            this.die5.Size = new System.Drawing.Size(66, 66);
+            this.die5.TabIndex = 6;
+            this.die5.Value = 0;
+            // 
+            // die4
+            // 
+            this.die4.Checked = false;
+            this.die4.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die4.Location = new System.Drawing.Point(341, 1);
+            this.die4.Margin = new System.Windows.Forms.Padding(1);
+            this.die4.Name = "die4";
+            this.die4.Size = new System.Drawing.Size(66, 66);
+            this.die4.TabIndex = 5;
+            this.die4.Value = 0;
+            // 
+            // die3
+            // 
+            this.die3.Checked = false;
+            this.die3.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die3.Location = new System.Drawing.Point(273, 1);
+            this.die3.Margin = new System.Windows.Forms.Padding(1);
+            this.die3.Name = "die3";
+            this.die3.Size = new System.Drawing.Size(66, 66);
+            this.die3.TabIndex = 4;
+            this.die3.Value = 0;
+            // 
+            // die2
+            // 
+            this.die2.Checked = false;
+            this.die2.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die2.Location = new System.Drawing.Point(205, 1);
+            this.die2.Margin = new System.Windows.Forms.Padding(1);
+            this.die2.Name = "die2";
+            this.die2.Size = new System.Drawing.Size(66, 66);
+            this.die2.TabIndex = 3;
+            this.die2.Value = 0;
+            // 
+            // die1
+            // 
+            this.die1.Checked = false;
+            this.die1.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die1.Location = new System.Drawing.Point(137, 1);
+            this.die1.Margin = new System.Windows.Forms.Padding(1);
+            this.die1.Name = "die1";
+            this.die1.Size = new System.Drawing.Size(66, 66);
+            this.die1.TabIndex = 2;
+            this.die1.Value = 0;
             // 
             // btnSelectCategory
             // 
@@ -300,17 +340,21 @@
             this.btnSelectCategory.UseVisualStyleBackColor = true;
             this.btnSelectCategory.Click += new System.EventHandler(this.btnSelectCategory_Click);
             // 
-            // pnlDashboard
+            // btnRollDice
             // 
-            this.pnlDashboard.AutoSize = true;
-            this.pnlDashboard.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pnlDashboard.Controls.Add(this.pnlOtherControls);
-            this.pnlDashboard.Controls.Add(this.pnlDiceLayout);
-            this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlDashboard.Location = new System.Drawing.Point(0, 24);
-            this.pnlDashboard.Name = "pnlDashboard";
-            this.pnlDashboard.Size = new System.Drawing.Size(684, 68);
-            this.pnlDashboard.TabIndex = 1;
+            this.btnRollDice.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRollDice.Image = global::Yahtzee.Properties.Resources.Roll;
+            this.btnRollDice.Location = new System.Drawing.Point(1, 1);
+            this.btnRollDice.Margin = new System.Windows.Forms.Padding(1);
+            this.btnRollDice.MaximumSize = new System.Drawing.Size(66, 66);
+            this.btnRollDice.MinimumSize = new System.Drawing.Size(66, 33);
+            this.btnRollDice.Name = "btnRollDice";
+            this.btnRollDice.Size = new System.Drawing.Size(66, 66);
+            this.btnRollDice.TabIndex = 0;
+            this.btnRollDice.Text = "Roll";
+            this.btnRollDice.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRollDice.UseVisualStyleBackColor = true;
+            this.btnRollDice.Click += new System.EventHandler(this.btnRollDice_Click);
             // 
             // pnlOtherControls
             // 
@@ -339,60 +383,26 @@
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.mnuHelp_Help_Click);
             // 
-            // die1
+            // pnlDashboard
             // 
-            this.die1.Checked = false;
-            this.die1.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die1.Location = new System.Drawing.Point(137, 1);
-            this.die1.Margin = new System.Windows.Forms.Padding(1);
-            this.die1.Name = "die1";
-            this.die1.Size = new System.Drawing.Size(66, 66);
-            this.die1.TabIndex = 2;
-            this.die1.Value = 0;
+            this.pnlDashboard.AutoSize = true;
+            this.pnlDashboard.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlDashboard.Controls.Add(this.pnlOtherControls);
+            this.pnlDashboard.Controls.Add(this.pnlDiceLayout);
+            this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlDashboard.Location = new System.Drawing.Point(0, 26);
+            this.pnlDashboard.Name = "pnlDashboard";
+            this.pnlDashboard.Size = new System.Drawing.Size(684, 68);
+            this.pnlDashboard.TabIndex = 1;
             // 
-            // die2
+            // lblDiv
             // 
-            this.die2.Checked = false;
-            this.die2.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die2.Location = new System.Drawing.Point(205, 1);
-            this.die2.Margin = new System.Windows.Forms.Padding(1);
-            this.die2.Name = "die2";
-            this.die2.Size = new System.Drawing.Size(66, 66);
-            this.die2.TabIndex = 3;
-            this.die2.Value = 0;
-            // 
-            // die3
-            // 
-            this.die3.Checked = false;
-            this.die3.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die3.Location = new System.Drawing.Point(273, 1);
-            this.die3.Margin = new System.Windows.Forms.Padding(1);
-            this.die3.Name = "die3";
-            this.die3.Size = new System.Drawing.Size(66, 66);
-            this.die3.TabIndex = 4;
-            this.die3.Value = 0;
-            // 
-            // die4
-            // 
-            this.die4.Checked = false;
-            this.die4.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die4.Location = new System.Drawing.Point(341, 1);
-            this.die4.Margin = new System.Windows.Forms.Padding(1);
-            this.die4.Name = "die4";
-            this.die4.Size = new System.Drawing.Size(66, 66);
-            this.die4.TabIndex = 5;
-            this.die4.Value = 0;
-            // 
-            // die5
-            // 
-            this.die5.Checked = false;
-            this.die5.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die5.Location = new System.Drawing.Point(409, 1);
-            this.die5.Margin = new System.Windows.Forms.Padding(1);
-            this.die5.Name = "die5";
-            this.die5.Size = new System.Drawing.Size(66, 66);
-            this.die5.TabIndex = 6;
-            this.die5.Value = 0;
+            this.lblDiv.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblDiv.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblDiv.Location = new System.Drawing.Point(0, 24);
+            this.lblDiv.Name = "lblDiv";
+            this.lblDiv.Size = new System.Drawing.Size(684, 2);
+            this.lblDiv.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -404,6 +414,7 @@
             this.Controls.Add(this.pnlScoreBoard);
             this.Controls.Add(this.mnuStatusBar);
             this.Controls.Add(this.pnlDashboard);
+            this.Controls.Add(this.lblDiv);
             this.Controls.Add(this.mnuMenuBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mnuMenuBar;
@@ -420,9 +431,9 @@
             this.mnuStatusBar.ResumeLayout(false);
             this.mnuStatusBar.PerformLayout();
             this.pnlDiceLayout.ResumeLayout(false);
+            this.pnlOtherControls.ResumeLayout(false);
             this.pnlDashboard.ResumeLayout(false);
             this.pnlDashboard.PerformLayout();
-            this.pnlOtherControls.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -452,15 +463,16 @@
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.FlowLayoutPanel pnlDiceLayout;
         private System.Windows.Forms.Button btnRollDice;
+        private System.Windows.Forms.Button btnSelectCategory;
         private Die die1;
         private Die die2;
         private Die die3;
         private Die die4;
         private Die die5;
-        private System.Windows.Forms.Button btnSelectCategory;
-        private System.Windows.Forms.Panel pnlDashboard;
         private System.Windows.Forms.FlowLayoutPanel pnlOtherControls;
         private System.Windows.Forms.Button btnHelp;
+        private System.Windows.Forms.Panel pnlDashboard;
+        private System.Windows.Forms.Label lblDiv;
     }
 }
 

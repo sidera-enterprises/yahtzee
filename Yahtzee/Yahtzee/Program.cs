@@ -40,11 +40,10 @@ namespace Yahtzee
 
                     _startup = new SplashScreenForm(5,
                                                     new RosterDialog(),
-                                                    "Copyright © " + AppVersionInfo.Year
-                                                    + " Sidera Enterprises. "
-                                                    + "Developed by Jeff Walker. "
-                                                    + "Software version "
-                                                    + AppVersionInfo.VersionMajorMinorBuild);
+                                                    "Yahtzee!"
+                                                    + " v" + AppVersionInfo.VersionMajorMinorBuild + "."
+                                                    + " Copyright © " + AppVersionInfo.Year
+                                                    + " Sidera Enterprises.");
                     Application.Run(_startup);
                 }
                 else
