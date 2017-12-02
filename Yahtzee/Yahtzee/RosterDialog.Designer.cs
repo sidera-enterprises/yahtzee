@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RosterDialog));
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlIcon = new System.Windows.Forms.PictureBox();
             this.lblTopDiv = new System.Windows.Forms.Label();
@@ -62,7 +62,7 @@
             // pnlHeader
             // 
             this.pnlHeader.BackColor = System.Drawing.SystemColors.Window;
-            this.pnlHeader.Controls.Add(this.label2);
+            this.pnlHeader.Controls.Add(this.lblWelcome);
             this.pnlHeader.Controls.Add(this.lblTitle);
             this.pnlHeader.Controls.Add(this.pnlIcon);
             this.pnlHeader.Controls.Add(this.lblTopDiv);
@@ -73,15 +73,15 @@
             this.pnlHeader.Size = new System.Drawing.Size(434, 100);
             this.pnlHeader.TabIndex = 0;
             // 
-            // label2
+            // lblWelcome
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(71, 69);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(349, 24);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Welcome! Who\'s playing this round?";
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(71, 69);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(349, 24);
+            this.lblWelcome.TabIndex = 3;
+            this.lblWelcome.Text = "Welcome! Who\'s playing this round?";
             // 
             // lblTitle
             // 
@@ -321,7 +321,7 @@
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.PictureBox pnlIcon;
         private System.Windows.Forms.Label lblTopDiv;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.StatusStrip mnuStatusBar;
         private System.Windows.Forms.ToolStripStatusLabel lblAppVersion;
