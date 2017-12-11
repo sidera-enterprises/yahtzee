@@ -26,6 +26,8 @@ namespace Yahtzee
                     //_yahtzeesRolled;
 
         private List<string>[] _categories;
+
+        private bool _touchMode;
         //private int[] _turnsLeft;
         public MainForm(string[] players)
         {
@@ -68,6 +70,16 @@ namespace Yahtzee
         #endregion
 
         #region Private properties
+        private bool TouchMode
+        {
+            get { return _touchMode; }
+            set
+            {
+                _touchMode = value;
+
+                // TODO add code here
+            }
+        }
         #endregion
 
         #region Private methods
@@ -553,6 +565,11 @@ namespace Yahtzee
         private void mnuGame_Exit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void mnuView_TouchMode_CheckedChanged(object sender, EventArgs e)
+        {
+            TouchMode = mnuView_TouchMode.Checked;
         }
 
         private void mnuHelp_Help_Click(object sender, EventArgs e)

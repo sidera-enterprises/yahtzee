@@ -42,7 +42,6 @@
             this.mnuGame_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp_Help = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuHelp_Rules = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp_sep1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuHelp_About = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuStatusBar = new System.Windows.Forms.StatusStrip();
@@ -50,17 +49,19 @@
             this.pnlScoreBoard = new System.Windows.Forms.Panel();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlDiceLayout = new System.Windows.Forms.FlowLayoutPanel();
-            this.die5 = new Yahtzee.Die();
-            this.die4 = new Yahtzee.Die();
-            this.die3 = new Yahtzee.Die();
-            this.die2 = new Yahtzee.Die();
-            this.die1 = new Yahtzee.Die();
-            this.btnSelectCategory = new System.Windows.Forms.Button();
             this.btnRollDice = new System.Windows.Forms.Button();
+            this.btnSelectCategory = new System.Windows.Forms.Button();
             this.pnlOtherControls = new System.Windows.Forms.FlowLayoutPanel();
             this.btnHelp = new System.Windows.Forms.Button();
             this.pnlDashboard = new System.Windows.Forms.Panel();
             this.lblDiv = new System.Windows.Forms.Label();
+            this.mnuView = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuView_TouchMode = new System.Windows.Forms.ToolStripMenuItem();
+            this.die1 = new Yahtzee.Die();
+            this.die2 = new Yahtzee.Die();
+            this.die3 = new Yahtzee.Die();
+            this.die4 = new Yahtzee.Die();
+            this.die5 = new Yahtzee.Die();
             this.mnuMenuBar.SuspendLayout();
             this.mnuStatusBar.SuspendLayout();
             this.pnlDiceLayout.SuspendLayout();
@@ -73,10 +74,11 @@
             this.mnuMenuBar.BackColor = System.Drawing.SystemColors.Window;
             this.mnuMenuBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuGame,
+            this.mnuView,
             this.mnuHelp});
             this.mnuMenuBar.Location = new System.Drawing.Point(0, 0);
             this.mnuMenuBar.Name = "mnuMenuBar";
-            this.mnuMenuBar.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.mnuMenuBar.Padding = new System.Windows.Forms.Padding(0);
             this.mnuMenuBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.mnuMenuBar.Size = new System.Drawing.Size(684, 24);
             this.mnuMenuBar.TabIndex = 0;
@@ -94,7 +96,7 @@
             this.mnuGame_sep3,
             this.mnuGame_Exit});
             this.mnuGame.Name = "mnuGame";
-            this.mnuGame.Size = new System.Drawing.Size(50, 22);
+            this.mnuGame.Size = new System.Drawing.Size(50, 24);
             this.mnuGame.Text = "&Game";
             // 
             // mnuGame_New
@@ -176,11 +178,10 @@
             // 
             this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuHelp_Help,
-            this.mnuHelp_Rules,
             this.mnuHelp_sep1,
             this.mnuHelp_About});
             this.mnuHelp.Name = "mnuHelp";
-            this.mnuHelp.Size = new System.Drawing.Size(44, 22);
+            this.mnuHelp.Size = new System.Drawing.Size(44, 24);
             this.mnuHelp.Text = "&Help";
             // 
             // mnuHelp_Help
@@ -188,30 +189,19 @@
             this.mnuHelp_Help.Name = "mnuHelp_Help";
             this.mnuHelp_Help.ShortcutKeyDisplayString = "";
             this.mnuHelp_Help.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.mnuHelp_Help.Size = new System.Drawing.Size(184, 22);
+            this.mnuHelp_Help.Size = new System.Drawing.Size(162, 22);
             this.mnuHelp_Help.Text = "&Help content";
             this.mnuHelp_Help.Click += new System.EventHandler(this.mnuHelp_Help_Click);
-            // 
-            // mnuHelp_Rules
-            // 
-            this.mnuHelp_Rules.Enabled = false;
-            this.mnuHelp_Rules.Name = "mnuHelp_Rules";
-            this.mnuHelp_Rules.ShortcutKeyDisplayString = "";
-            this.mnuHelp_Rules.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F1)));
-            this.mnuHelp_Rules.Size = new System.Drawing.Size(184, 22);
-            this.mnuHelp_Rules.Text = "Game &rules";
-            this.mnuHelp_Rules.Visible = false;
-            this.mnuHelp_Rules.Click += new System.EventHandler(this.mnuHelp_Rules_Click);
             // 
             // mnuHelp_sep1
             // 
             this.mnuHelp_sep1.Name = "mnuHelp_sep1";
-            this.mnuHelp_sep1.Size = new System.Drawing.Size(181, 6);
+            this.mnuHelp_sep1.Size = new System.Drawing.Size(159, 6);
             // 
             // mnuHelp_About
             // 
             this.mnuHelp_About.Name = "mnuHelp_About";
-            this.mnuHelp_About.Size = new System.Drawing.Size(184, 22);
+            this.mnuHelp_About.Size = new System.Drawing.Size(162, 22);
             this.mnuHelp_About.Text = "&About Yahtzee!";
             this.mnuHelp_About.Click += new System.EventHandler(this.mnuHelp_About_Click);
             // 
@@ -268,60 +258,21 @@
             this.pnlDiceLayout.Size = new System.Drawing.Size(476, 68);
             this.pnlDiceLayout.TabIndex = 0;
             // 
-            // die5
+            // btnRollDice
             // 
-            this.die5.Checked = false;
-            this.die5.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die5.Location = new System.Drawing.Point(409, 1);
-            this.die5.Margin = new System.Windows.Forms.Padding(1);
-            this.die5.Name = "die5";
-            this.die5.Size = new System.Drawing.Size(66, 66);
-            this.die5.TabIndex = 6;
-            this.die5.Value = 0;
-            // 
-            // die4
-            // 
-            this.die4.Checked = false;
-            this.die4.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die4.Location = new System.Drawing.Point(341, 1);
-            this.die4.Margin = new System.Windows.Forms.Padding(1);
-            this.die4.Name = "die4";
-            this.die4.Size = new System.Drawing.Size(66, 66);
-            this.die4.TabIndex = 5;
-            this.die4.Value = 0;
-            // 
-            // die3
-            // 
-            this.die3.Checked = false;
-            this.die3.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die3.Location = new System.Drawing.Point(273, 1);
-            this.die3.Margin = new System.Windows.Forms.Padding(1);
-            this.die3.Name = "die3";
-            this.die3.Size = new System.Drawing.Size(66, 66);
-            this.die3.TabIndex = 4;
-            this.die3.Value = 0;
-            // 
-            // die2
-            // 
-            this.die2.Checked = false;
-            this.die2.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die2.Location = new System.Drawing.Point(205, 1);
-            this.die2.Margin = new System.Windows.Forms.Padding(1);
-            this.die2.Name = "die2";
-            this.die2.Size = new System.Drawing.Size(66, 66);
-            this.die2.TabIndex = 3;
-            this.die2.Value = 0;
-            // 
-            // die1
-            // 
-            this.die1.Checked = false;
-            this.die1.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die1.Location = new System.Drawing.Point(137, 1);
-            this.die1.Margin = new System.Windows.Forms.Padding(1);
-            this.die1.Name = "die1";
-            this.die1.Size = new System.Drawing.Size(66, 66);
-            this.die1.TabIndex = 2;
-            this.die1.Value = 0;
+            this.btnRollDice.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRollDice.Image = global::Yahtzee.Properties.Resources.Roll;
+            this.btnRollDice.Location = new System.Drawing.Point(1, 1);
+            this.btnRollDice.Margin = new System.Windows.Forms.Padding(1);
+            this.btnRollDice.MaximumSize = new System.Drawing.Size(66, 66);
+            this.btnRollDice.MinimumSize = new System.Drawing.Size(66, 33);
+            this.btnRollDice.Name = "btnRollDice";
+            this.btnRollDice.Size = new System.Drawing.Size(66, 66);
+            this.btnRollDice.TabIndex = 0;
+            this.btnRollDice.Text = "Roll";
+            this.btnRollDice.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRollDice.UseVisualStyleBackColor = true;
+            this.btnRollDice.Click += new System.EventHandler(this.btnRollDice_Click);
             // 
             // btnSelectCategory
             // 
@@ -339,22 +290,6 @@
             this.btnSelectCategory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSelectCategory.UseVisualStyleBackColor = true;
             this.btnSelectCategory.Click += new System.EventHandler(this.btnSelectCategory_Click);
-            // 
-            // btnRollDice
-            // 
-            this.btnRollDice.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRollDice.Image = global::Yahtzee.Properties.Resources.Roll;
-            this.btnRollDice.Location = new System.Drawing.Point(1, 1);
-            this.btnRollDice.Margin = new System.Windows.Forms.Padding(1);
-            this.btnRollDice.MaximumSize = new System.Drawing.Size(66, 66);
-            this.btnRollDice.MinimumSize = new System.Drawing.Size(66, 33);
-            this.btnRollDice.Name = "btnRollDice";
-            this.btnRollDice.Size = new System.Drawing.Size(66, 66);
-            this.btnRollDice.TabIndex = 0;
-            this.btnRollDice.Text = "Roll";
-            this.btnRollDice.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRollDice.UseVisualStyleBackColor = true;
-            this.btnRollDice.Click += new System.EventHandler(this.btnRollDice_Click);
             // 
             // pnlOtherControls
             // 
@@ -403,6 +338,79 @@
             this.lblDiv.Name = "lblDiv";
             this.lblDiv.Size = new System.Drawing.Size(684, 2);
             this.lblDiv.TabIndex = 0;
+            // 
+            // mnuView
+            // 
+            this.mnuView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuView_TouchMode});
+            this.mnuView.Name = "mnuView";
+            this.mnuView.Size = new System.Drawing.Size(44, 24);
+            this.mnuView.Text = "&View";
+            this.mnuView.Visible = false;
+            // 
+            // mnuView_TouchMode
+            // 
+            this.mnuView_TouchMode.CheckOnClick = true;
+            this.mnuView_TouchMode.Name = "mnuView_TouchMode";
+            this.mnuView_TouchMode.Size = new System.Drawing.Size(152, 22);
+            this.mnuView_TouchMode.Text = "&Touch mode";
+            this.mnuView_TouchMode.Visible = false;
+            this.mnuView_TouchMode.CheckedChanged += new System.EventHandler(this.mnuView_TouchMode_CheckedChanged);
+            // 
+            // die1
+            // 
+            this.die1.Checked = false;
+            this.die1.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die1.Location = new System.Drawing.Point(137, 1);
+            this.die1.Margin = new System.Windows.Forms.Padding(1);
+            this.die1.Name = "die1";
+            this.die1.Size = new System.Drawing.Size(66, 66);
+            this.die1.TabIndex = 2;
+            this.die1.Value = 0;
+            // 
+            // die2
+            // 
+            this.die2.Checked = false;
+            this.die2.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die2.Location = new System.Drawing.Point(205, 1);
+            this.die2.Margin = new System.Windows.Forms.Padding(1);
+            this.die2.Name = "die2";
+            this.die2.Size = new System.Drawing.Size(66, 66);
+            this.die2.TabIndex = 3;
+            this.die2.Value = 0;
+            // 
+            // die3
+            // 
+            this.die3.Checked = false;
+            this.die3.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die3.Location = new System.Drawing.Point(273, 1);
+            this.die3.Margin = new System.Windows.Forms.Padding(1);
+            this.die3.Name = "die3";
+            this.die3.Size = new System.Drawing.Size(66, 66);
+            this.die3.TabIndex = 4;
+            this.die3.Value = 0;
+            // 
+            // die4
+            // 
+            this.die4.Checked = false;
+            this.die4.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die4.Location = new System.Drawing.Point(341, 1);
+            this.die4.Margin = new System.Windows.Forms.Padding(1);
+            this.die4.Name = "die4";
+            this.die4.Size = new System.Drawing.Size(66, 66);
+            this.die4.TabIndex = 5;
+            this.die4.Value = 0;
+            // 
+            // die5
+            // 
+            this.die5.Checked = false;
+            this.die5.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die5.Location = new System.Drawing.Point(409, 1);
+            this.die5.Margin = new System.Windows.Forms.Padding(1);
+            this.die5.Name = "die5";
+            this.die5.Size = new System.Drawing.Size(66, 66);
+            this.die5.TabIndex = 6;
+            this.die5.Value = 0;
             // 
             // MainForm
             // 
@@ -457,7 +465,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuGame_Exit;
         private System.Windows.Forms.ToolStripMenuItem mnuHelp;
         private System.Windows.Forms.ToolStripMenuItem mnuHelp_Help;
-        private System.Windows.Forms.ToolStripMenuItem mnuHelp_Rules;
         private System.Windows.Forms.ToolStripSeparator mnuHelp_sep1;
         private System.Windows.Forms.ToolStripMenuItem mnuHelp_About;
         private System.Windows.Forms.Panel pnlMain;
@@ -473,6 +480,8 @@
         private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.Panel pnlDashboard;
         private System.Windows.Forms.Label lblDiv;
+        private System.Windows.Forms.ToolStripMenuItem mnuView;
+        private System.Windows.Forms.ToolStripMenuItem mnuView_TouchMode;
     }
 }
 
