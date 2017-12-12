@@ -63,6 +63,9 @@ namespace Yahtzee
                 _checked = (Value > 0) && value;
                 pnlFace.BackColor = (Value > 0) ? (_checked ? CheckedColor : BackColor)
                                                 : Color.Transparent;
+
+                if (Value > 0)
+                    ttpDie.SetToolTip(pnlFace, "Click to " + (value ? "unhold" : "hold"));
             }
         }
 
@@ -74,6 +77,9 @@ namespace Yahtzee
                 if (value >= 0 && value <= 6)
                 {
                     _value = value;
+
+                    if (value == 0)
+                        ttpDie.SetToolTip(pnlFace, "");
 
                     if (value == 0)
                     {

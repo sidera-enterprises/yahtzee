@@ -25,8 +25,6 @@ namespace Yahtzee
         private int _rolls;
                     //_yahtzeesRolled;
 
-        private List<string>[] _categories;
-
         private bool _touchMode;
         //private int[] _turnsLeft;
         public MainForm(string[] players)
@@ -49,15 +47,6 @@ namespace Yahtzee
             _scoreSheet.Margin = new Padding(3);
             _scoreSheet.Location = new Point(_scoreSheet.Margin.Left,
                                              _scoreSheet.Margin.Top);
-
-            _categories = new List<string>[_scoreSheet.Players.Length];
-            for (int i = 0; i < _categories.Length; i++)
-            {
-                _categories[i] = new List<string>();
-
-                foreach (string s in ScoreSheet.UpperSectionLabels) _categories[i].Add(s.ToUpper());
-                foreach (string s in ScoreSheet.LowerSectionLabels) _categories[i].Add(s.ToUpper());
-            }
 
             InitializeRolls();
             lblStatusMessage.Text = (_players.Length > 1) ? "Okay, " + _scoreSheet.CurrentPlayer
@@ -114,9 +103,10 @@ namespace Yahtzee
             lblStatusMessage.Text = (_rolls > 0) ? "You now have " + _rolls + " "
                                                  + (_rolls == 1 ? "roll" : "rolls") + " "
                                                  + "left. You can roll again or click "
-                                                 + "Submit to select a category."
+                                                 + "any of the above suggested scores."
                                                  : "You are out of rolls. Please click "
-                                                 + "Submit to select a category.";
+                                                 + "one of the above suggested scores "
+                                                 + "to continue.";
         }
 
         //
@@ -133,6 +123,62 @@ namespace Yahtzee
         }
 
         //
+
+        private int CalculateScore(string category)
+        {
+            int points = 0;
+
+            switch (category.ToUpper())
+            {
+                // Upper Section
+                case "ACES":
+                case "ONES":
+                    points = SumDiceOfValue(1);
+                    break;
+                case "TWOS":
+                    points = SumDiceOfValue(2);
+                    break;
+                case "THREES":
+                    points = SumDiceOfValue(3);
+                    break;
+                case "FOURS":
+                    points = SumDiceOfValue(4);
+                    break;
+                case "FIVES":
+                    points = SumDiceOfValue(5);
+                    break;
+                case "SIXES":
+                    points = SumDiceOfValue(6);
+                    break;
+
+                // Lower Section
+                case "3 OF A KIND":
+                    points = Get3OfAKind();
+                    break;
+                case "4 OF A KIND":
+                    points = Get4OfAKind();
+                    break;
+                case "FULL HOUSE":
+                    points = GetFullHouse();
+                    break;
+                case "SM. STRAIGHT":
+                case "SMALL STRAIGHT":
+                    points = GetSmallStraight();
+                    break;
+                case "LG. STRAIGHT":
+                case "LARGE STRAIGHT":
+                    points = GetLargeStraight();
+                    break;
+                case "YAHTZEE":
+                    points = GetYahtzee();
+                    break;
+                case "CHANCE":
+                    points = GetChance();
+                    break;
+            }
+
+            return points;
+        }
 
         private int CountDiceOfValue(int value)
         {
@@ -266,20 +312,7 @@ namespace Yahtzee
 
         private bool GameOver()
         {
-            bool gameOver = true;
-            foreach (List<string> l in _categories)
-            {
-                // If even one list of categories is not empty, do not
-                // declare game over
-                if (l.Count > 0)
-                {
-                    gameOver = false;
-                    
-                    break;
-                }
-            }
-
-            return gameOver;
+            return _scoreSheet.GameOver();
         }
         #endregion
 
@@ -318,41 +351,23 @@ namespace Yahtzee
         {
             if (_exitOnClose)
             {
-                string message = GameOver() ? "Are you sure you don't want to play "
-                                            + "another round?"
-                                            : "Are you sure you want to leave the "
-                                            + "game?";
+                string message = "Are you sure you want to leave the "
+                               + "game?";
 
-                DialogResult dr = MessageBox.Show(message,
-                                                  "",
-                                                  MessageBoxButtons.YesNo,
-                                                  MessageBoxIcon.Question);
+                if (!GameOver())
+                {
+                    DialogResult dr = MessageBox.Show(message,
+                                                      "",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Question);
 
-                // Refuse to close if that is what the user does
-                // not want
-                e.Cancel = (!GameOver() && dr == DialogResult.No);
-                // Shut down the program if the user wants to
-                // leave the game
-                if (dr == DialogResult.Yes) Program.Exit();
+                    e.Cancel = (dr == DialogResult.No);
 
-                /*string message = GameOver() ? "Would you like to play another game?"
-                                            : "Are you sure you want to end the game?";
-
-                DialogResult dr = MessageBox.Show(message,
-                                                  "",
-                                                  GameOver() ? MessageBoxButtons.YesNoCancel
-                                                             : MessageBoxButtons.YesNo,
-                                                  MessageBoxIcon.Question);
-
-                // Refuse to close if that is what the user does
-                // not want
-                e.Cancel = (dr == DialogResult.Cancel || (!GameOver() && dr == DialogResult.No));
-                // Shut down the program if the user has finished
-                // the game AND wants to leave the game (see
-                // Program.cs:Exit() method)
-                if ((!GameOver() && dr == DialogResult.Yes) ||
-                    (GameOver() && dr == DialogResult.No)) Program.Exit();
-                    */
+                    // Shut down the program if the user wants to
+                    // leave the game
+                    if (dr == DialogResult.Yes) Program.Exit();
+                }
+                else Program.Exit();
             }
         }
 
@@ -383,137 +398,32 @@ namespace Yahtzee
                 }
 
                 DecreaseRolls();
+
+                // Preview potential points awardable
+                foreach (string s in ScoreSheet.UpperSectionLabels)
+                    _scoreSheet.PreviewPoints(s, CalculateScore(s));
+                foreach (string s in ScoreSheet.LowerSectionLabels)
+                    _scoreSheet.PreviewPoints(s, CalculateScore(s));
             }
         }
 
         private void btnSelectCategory_Click(object sender, EventArgs e)
         {
-            CategoryDialog c = new CategoryDialog(_categories[_scoreSheet.Turn]);
+            CategoryDialog c = new CategoryDialog(_scoreSheet.Categories[_scoreSheet.Turn]);
             DialogResult drc = c.ShowDialog();
 
             if (drc == DialogResult.OK)
             {
                 string category = c.Value;
                 int points = 0;
-                
-                switch (category.ToUpper())
-                {
-                    // Upper Section
-                    case "ACES":
-                    case "ONES":
-                        points = SumDiceOfValue(1);
-                        break;
-                    case "TWOS":
-                        points = SumDiceOfValue(2);
-                        break;
-                    case "THREES":
-                        points = SumDiceOfValue(3);
-                        break;
-                    case "FOURS":
-                        points = SumDiceOfValue(4);
-                        break;
-                    case "FIVES":
-                        points = SumDiceOfValue(5);
-                        break;
-                    case "SIXES":
-                        points = SumDiceOfValue(6);
-                        break;
 
-                    // Lower Section
-                    case "3 OF A KIND":
-                        points = Get3OfAKind();
-                        break;
-                    case "4 OF A KIND":
-                        points = Get4OfAKind();
-                        break;
-                    case "FULL HOUSE":
-                        points = GetFullHouse();
-                        break;
-                    case "SM. STRAIGHT":
-                    case "SMALL STRAIGHT":
-                        points = GetSmallStraight();
-                        break;
-                    case "LG. STRAIGHT":
-                    case "LARGE STRAIGHT":
-                        points = GetLargeStraight();
-                        break;
-                    case "YAHTZEE":
-                        points = GetYahtzee();
-                        break;
-                    case "CHANCE":
-                        points = GetChance();
-                        break;
-                }
+                points = CalculateScore(category);
 
                 /*if (category.ToUpper() == "YAHTZEE")
                     _yahtzeesRolled++;
                 else*/
-                _categories[_scoreSheet.Turn].Remove(category);
 
                 _scoreSheet.AwardPoints(category, _scoreSheet.Turn, points);
-
-                // Determine whether to switch turns or to declare game over
-                if (!GameOver())
-                {
-                    _scoreSheet.SwitchTurn();
-
-                    // Indicate whose turn it is in the status bar
-                    string name = _scoreSheet.CurrentPlayer;
-                    lblStatusMessage.Text = (_scoreSheet.Players.Length > 1) ?
-                                                "Okay, " + name + ", it's your turn."
-                                              : "Please roll the dice to continue, "
-                                              + name + ".";
-                }
-                else
-                {
-                    // Block further input once game is finished
-                    btnRollDice.Enabled = btnSelectCategory.Enabled = false;
-
-                    // Announce the winner(s)
-                    int highScore = _scoreSheet.GetWinningScore();
-                    string message;
-                    if (_scoreSheet.Players.Length > 1)
-                    {
-                        string[] winners = _scoreSheet.GetWinningPlayers();
-                        string winnersString = "";
-
-                        // Decide how to display the list of winning players
-                        if (winners.Length == 1)
-                            winnersString = winners[0];
-                        else if (winners.Length == 2)
-                            winnersString = winners[0] + " and " + winners[1];
-                        else
-                        {
-                            for (int i = 0; i < winners.Length - 1; i++)
-                                winnersString += winners[i] + ", ";
-
-                            winnersString += "and " + winners[winners.Length - 1];
-                        }
-
-                        message = winnersString + ((winners.Length > 1) ? " are tied"
-                                                                        : " is the winner");
-
-                        message += ", with a final score of " + highScore + " points!";
-                    }
-                    else
-                    {
-                        message = "You have finished with a final score of " + highScore + " points.";
-                    }
-
-                    lblStatusMessage.Text = message;
-
-                    DialogResult drgo = MessageBox.Show(message + (char)13 + (char)13 +
-                                                        "Would you like to play another game?",
-                                                        "Game over",
-                                                        MessageBoxButtons.YesNo,
-                                                        MessageBoxIcon.Information);
-
-                    if (drgo == DialogResult.Yes)
-                    {
-                        _exitOnClose = false;
-                        Close();
-                    }
-                }
             }
         }
 
@@ -522,6 +432,66 @@ namespace Yahtzee
             InitializeRolls();
 
             foreach (Die d in _dice) d.Value = 0;
+
+            // Indicate whose turn it is in the status bar
+            string name = _scoreSheet.CurrentPlayer;
+            lblStatusMessage.Text = (_scoreSheet.Players.Length > 1) ?
+                                        "Okay, " + name + ", it's your turn."
+                                      : "Please roll the dice to continue, "
+                                      + name + ".";
+            
+            // Determine whether to switch turns or to declare game over
+            if (GameOver())
+            {
+                // Block further input once game is finished
+                btnRollDice.Enabled = btnSelectCategory.Enabled = false;
+                btnRollDice.Text = "Roll";
+
+                // Announce the winner(s)
+                int highScore = _scoreSheet.GetWinningScore();
+                string message;
+                if (_scoreSheet.Players.Length > 1)
+                {
+                    string[] winners = _scoreSheet.GetWinningPlayers();
+                    string winnersString = "";
+
+                    // Decide how to display the list of winning players
+                    if (winners.Length == 1)
+                        winnersString = winners[0];
+                    else if (winners.Length == 2)
+                        winnersString = winners[0] + " and " + winners[1];
+                    else
+                    {
+                        for (int i = 0; i < winners.Length - 1; i++)
+                            winnersString += winners[i] + ", ";
+
+                        winnersString += "and " + winners[winners.Length - 1];
+                    }
+
+                    message = winnersString + ((winners.Length > 1) ? " are tied"
+                                                                    : " is the winner");
+
+                    message += ", with a final score of " + highScore + " points!";
+                }
+                else
+                {
+                    message = "You have finished with a final score of " + highScore + " points.";
+                }
+
+                lblStatusMessage.Text = message;
+
+                DialogResult drgo = MessageBox.Show(message + (char)13 + (char)13 +
+                                                    "Would you like to play another game?",
+                                                    "Game over",
+                                                    MessageBoxButtons.YesNo,
+                                                    MessageBoxIcon.Information);
+
+                if (drgo == DialogResult.Yes)
+                {
+                    _exitOnClose = false;
+                    Close();
+                }
+            }
         }
 
         //
@@ -529,6 +499,7 @@ namespace Yahtzee
         private void mnuGame_New_Click(object sender, EventArgs e)
         {
             _exitOnClose = false;
+
             if (!GameOver())
             {
                 DialogResult dr = MessageBox.Show("Are you sure you want "
@@ -540,6 +511,10 @@ namespace Yahtzee
                 if (dr == DialogResult.Yes) Close();
             }
             else Close();
+
+            // If the user opts not to start a new game, reset the
+            // exitOnClose value to its default state.
+            _exitOnClose = true;
         }
 
         private void mnuGame_Load_Click(object sender, EventArgs e)

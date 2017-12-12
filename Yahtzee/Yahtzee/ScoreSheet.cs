@@ -13,6 +13,7 @@ namespace Yahtzee
     {
         #region Initialization
         private List<string> _sectionList;
+        private List<string>[] _categories;
 
         private string[][] _sectionArray;
         private string[] _players;
@@ -20,7 +21,12 @@ namespace Yahtzee
         private int[] _turnsLeft;
 
         private int _turn;
-        private Color _turnColor;
+        
+        private Color _sheetBgColor,
+                      _sheetFgColor,
+                      _turnBgColor,
+                      _turnFgColor,
+                      _prvwFgColor;
 
         private int _yahtzeesRolled;
 
@@ -54,7 +60,20 @@ namespace Yahtzee
 
             _players = players;
             _turn = 0;
-            TurnColor = Color.LightYellow;
+
+            _categories = new List<string>[players.Length];
+            for (int i = 0; i < _categories.Length; i++)
+            {
+                _categories[i] = new List<string>();
+
+                foreach (string s in UpperSectionLabels) _categories[i].Add(s.ToUpper());
+                foreach (string s in LowerSectionLabels) _categories[i].Add(s.ToUpper());
+            }
+
+            BackColor = SystemColors.Control;
+            ForeColor = SystemColors.WindowText;
+            TurnBackColor = Color.LightYellow;
+            PreviewForeColor = Color.Red;
 
             _yahtzeesRolled = 0;
 
@@ -70,7 +89,7 @@ namespace Yahtzee
                     bool header = (j == 0);
                     //int length = 12;
 
-                    pnlScoreTable.Controls.Add(new Label()
+                    Label l = new Label()
                     {
                         Anchor = AnchorStyles.None,
                         AutoSize = true,
@@ -80,7 +99,11 @@ namespace Yahtzee
                         MinimumSize = new Size(header ? 0 : 120, 0),
                         Text = header ? name.ToUpper() : "", //.ToUpper().Substring(0, (name.Length < length) ? name.Length : length) : "",
                         TextAlign = ContentAlignment.MiddleRight
-                    }, 2 + i, j);
+                    };
+
+                    pnlScoreTable.Controls.Add(l, 2 + i, j);
+
+                    if (!header) l.MouseClick += lblScoreBox_MouseClick;
                 }
             }
             
@@ -121,6 +144,8 @@ namespace Yahtzee
         #endregion
 
         #region Public properties
+        public List<string>[] Categories { get { return _categories; } }
+
         public string[] Players
         {
             get { return _players; }
@@ -154,10 +179,70 @@ namespace Yahtzee
             }*/
         }
 
-        public Color TurnColor
+        public new Color BackColor
         {
-            get { return _turnColor; }
-            set { _turnColor = value; }
+            get { return _sheetBgColor; }
+            set { base.BackColor = _sheetBgColor = value; }
+        }
+
+        public new Color ForeColor
+        {
+            get { return _sheetFgColor; }
+            set { base.ForeColor = _sheetFgColor = value; }
+        }
+
+        public Color TurnBackColor
+        {
+            get { return _turnBgColor; }
+            set
+            {
+                Color old = _turnBgColor;
+
+                _turnBgColor = value;
+
+                foreach (Control c in pnlScoreTable.Controls)
+                {
+                    if (c.BackColor == old)
+                        c.BackColor = _turnBgColor;
+                }
+            }
+        }
+
+        public Color TurnForeColor
+        {
+            get { return _turnFgColor; }
+            set
+            {
+                Color old = _turnFgColor;
+
+                _turnFgColor = value;
+
+                foreach (Control c in pnlScoreTable.Controls)
+                {
+                    if (c.ForeColor == old)
+                        c.ForeColor = _turnFgColor;
+                }
+            }
+        }
+
+        public Color PreviewForeColor
+        {
+            get { return _prvwFgColor; }
+            set
+            {
+                if (value == ForeColor)
+                    throw new Exception("Preview color must be different from default foreground color.");
+
+                Color old = _prvwFgColor;
+
+                _prvwFgColor = value;
+
+                foreach (Control c in pnlScoreTable.Controls)
+                {
+                    if (c.ForeColor == old)
+                        c.ForeColor = _prvwFgColor;
+                }
+            }
         }
         #endregion
 
@@ -257,9 +342,25 @@ namespace Yahtzee
         }*/
         #endregion
 
+        #region Public static methods
+
+        #endregion
+
         #region Public methods
+        /// <summary>
+        /// Awards a specified score to the player's score table and rotates
+        /// the player's turn to the next player in the queue.
+        /// </summary>
+        /// <param name="categoryName">The category to search along the score table's left axis.</param>
+        /// <param name="playerIndex">The index of the player who has earned the score.</param>
+        /// <param name="points">The score to award the player.</param>
         public void AwardPoints(string categoryName, int playerIndex, int points)
         {
+            ClearPreviews();
+            Categories[Turn].Remove(categoryName);
+
+            //
+
             Label scoreBox;
             
             int usSubtotalRowIndex, usBonusRowIndex, usTotalRowIndex,
@@ -268,31 +369,34 @@ namespace Yahtzee
 
             int score;
             int upperTotal;//, lowerTotal;
-            int row = 0,
-                col = 0;
+            //int row = 0,
+            //    col = 0;
+            int col = 2 + playerIndex;
 
-            for (int i = 1; i < pnlScoreTable.RowCount; i++)
-            {
-                Control c = pnlScoreTable.GetControlFromPosition(1, i);
+            //for (int i = 1; i < pnlScoreTable.RowCount; i++)
+            //{
+            //    Control c = pnlScoreTable.GetControlFromPosition(1, i);
 
-                if (categoryName.ToUpper() == c.Text.ToUpper())
-                {
-                    /*if (categoryName.ToUpper().Contains("TOTAL")
-                     || categoryName.ToUpper().Contains("BONUS"))
-                        row = -1;
-                    else*/
-                        row = i;
-                }
-                //else row = -1;
-            }
-            col = 2 + playerIndex;
+            //    if (categoryName.ToUpper() == c.Text.ToUpper())
+            //    {
+            //        /*if (categoryName.ToUpper().Contains("TOTAL")
+            //         || categoryName.ToUpper().Contains("BONUS"))
+            //            row = -1;
+            //        else*/
+            //        row = i;
+            //    }
+            //    //else row = -1;
+            //}
+            //col = 2 + playerIndex;
 
-            /*if (row == -1) throw new Exception("Category name must be a value listed "
-                                             + "under the UPPER or LOWER sections.");*/
+            ////*if (row == -1) throw new Exception("Category name must be a value listed "
+            //                                 + "under the UPPER or LOWER sections.");*/
 
-            //
+            ////
 
-            scoreBox = pnlScoreTable.GetControlFromPosition(col, row) as Label;
+            //scoreBox = pnlScoreTable.GetControlFromPosition(col, row) as Label;
+
+            scoreBox = GetScoreSlot(categoryName, playerIndex);
 
             usSubtotalRowIndex = 1 + _sectionList.IndexOf(UpperSubtotalLabels[0].ToUpper());
             usBonusRowIndex = 1 + _sectionList.IndexOf(UpperSubtotalLabels[1].ToUpper());
@@ -307,7 +411,9 @@ namespace Yahtzee
             score = (scoreBox.Text != "") ? Int32.Parse(scoreBox.Text) : 0;
             upperTotal = UpperSectionSubtotal(playerIndex);
 
+            scoreBox.Cursor = Cursors.Default;
             scoreBox.Text = (score + points).ToString();
+
             #region Set total/bonus label text
             if (UpperSectionSubtotal(playerIndex) > 0)
             {
@@ -365,6 +471,45 @@ namespace Yahtzee
                 c.Text = GrandTotal(playerIndex).ToString();
             }
             #endregion
+
+            SwitchTurn();
+        }
+
+        public void PreviewPoints(string categoryName, int points)
+        {
+            Label scoreBox = GetScoreSlot(categoryName, _turn);
+
+            if (String.IsNullOrWhiteSpace(scoreBox.Text) || scoreBox.ForeColor == PreviewForeColor)
+            {
+                scoreBox.Cursor = Cursors.Hand;
+                scoreBox.ForeColor = PreviewForeColor;
+                scoreBox.Text = points.ToString();
+            }
+        }
+
+        public void ClearPreviews()
+        {
+            foreach (Control c in pnlScoreTable.Controls)
+            {
+                if (c.ForeColor == PreviewForeColor)
+                {
+                    c.Cursor = Cursors.Default;
+                    c.ForeColor = ForeColor;
+                    c.Text = "";
+                }
+            }
+        }
+
+        public bool GameOver()
+        {
+            foreach (List<string> l in Categories)
+            {
+                // If even one list of categories is not empty, do not
+                // declare game over
+                if (l.Count > 0) return false;
+            }
+
+            return true;
         }
 
         public int UpperSectionSubtotal(int playerIndex)
@@ -634,10 +779,47 @@ namespace Yahtzee
 
                     //header.ForeColor = (j == _turn) ? Color.Red : SystemColors.ControlText;
 
-                    cell.BackColor = (j == _turn) ? TurnColor : SystemColors.Control;
-                    cell.ForeColor = (j == _turn) ? Color.Black : SystemColors.WindowText;
+                    if (!GameOver())
+                    {
+                        cell.BackColor = (j == _turn) ? TurnBackColor : BackColor;
+                        cell.ForeColor = (j == _turn) ? TurnForeColor : ForeColor;
+                    }
+                    else
+                    {
+                        cell.BackColor = BackColor;
+                        cell.ForeColor = ForeColor;
+                    }
                 }
             }
+        }
+
+        private Label GetScoreSlot(string categoryName, int playerIndex)
+        {
+            Label scoreBox = null;
+
+            int row = 0,
+                col = 0;
+
+            for (int i = 1; i < pnlScoreTable.RowCount; i++)
+            {
+                scoreBox = pnlScoreTable.GetControlFromPosition(1, i) as Label;
+
+                if (categoryName.ToUpper() == scoreBox.Text.ToUpper())
+                {
+                    row = i;
+                    break;
+                }
+
+                scoreBox = null;
+            }
+            col = 2 + playerIndex;
+
+            if (scoreBox == null)
+                throw new Exception("Category name \"" + categoryName + "\" does not exist.");
+            else if (playerIndex < 0 || playerIndex > Players.Length - 1)
+                throw new Exception("Player index must be between 0 and " + (Players.Length - 1) + " inclusively.");
+            else
+                return pnlScoreTable.GetControlFromPosition(col, row) as Label;
         }
         #endregion
 
@@ -660,6 +842,26 @@ namespace Yahtzee
         private void LowerSectionLabel_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void lblScoreBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (sender is Label)
+                {
+                    Label l = sender as Label;
+
+                    if (l.Cursor == Cursors.Hand)
+                    {
+                        int row = pnlScoreTable.GetCellPosition(l).Row;
+
+                        string category = pnlScoreTable.GetControlFromPosition(1, row).Text;
+
+                        AwardPoints(category, Turn, Int32.Parse(l.Text));
+                    }
+                }
+            }
         }
         #endregion
     }
