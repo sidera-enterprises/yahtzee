@@ -261,12 +261,14 @@ namespace Yahtzee
             int points = 0;
 
             bool twoKind = false,
-                 threeKind = false;
+                 threeKind = false,
+                 fiveKind = false;
 
             for (int i = 1; i <= 6; i++)
             {
                 for (int j = 1; j <= 6; j++)
                 {
+                    // Two of a kind
                     if (CountDiceOfValue(j) == 2)
                     {
                         twoKind = true;
@@ -274,14 +276,22 @@ namespace Yahtzee
                     }
                 }
                 
+                // Three of a kind
                 if (CountDiceOfValue(i) == 3)
                 {
                     threeKind = true;
                     break;
                 }
+
+                // Count if the player rolls a Yahtzee
+                if (CountDiceOfValue(i) == 5)
+                {
+                    fiveKind = true;
+                    break;
+                }
             }
 
-            points = (twoKind && threeKind) ? 25 : 0;
+            points = (twoKind && threeKind) || fiveKind ? 25 : 0;
 
             return points;
         }
