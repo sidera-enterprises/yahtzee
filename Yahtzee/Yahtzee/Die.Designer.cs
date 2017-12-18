@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.pnlBorder = new System.Windows.Forms.Panel();
             this.pnlFace = new System.Windows.Forms.Panel();
-            this.ttpDie = new System.Windows.Forms.ToolTip(this.components);
             this.pnlBorder.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,6 +73,5 @@
 
         private System.Windows.Forms.Panel pnlBorder;
         private System.Windows.Forms.Panel pnlFace;
-        private System.Windows.Forms.ToolTip ttpDie;
     }
 }

@@ -60,12 +60,13 @@ namespace Yahtzee
             get { return _checked; }
             set
             {
+                bool old = _checked;
+
                 _checked = (Value > 0) && value;
                 pnlFace.BackColor = (Value > 0) ? (_checked ? CheckedColor : BackColor)
                                                 : Color.Transparent;
 
-                if (Value > 0)
-                    ttpDie.SetToolTip(pnlFace, "Click to " + (value ? "unhold" : "hold"));
+                if (old != value) OnCheckedChanged(EventArgs.Empty);
             }
         }
 
@@ -77,9 +78,6 @@ namespace Yahtzee
                 if (value >= 0 && value <= 6)
                 {
                     _value = value;
-
-                    if (value == 0)
-                        ttpDie.SetToolTip(pnlFace, "");
 
                     if (value == 0)
                     {
@@ -100,6 +98,8 @@ namespace Yahtzee
                     }
                 }
                 else throw new Exception("Value must be between 0 and 6.");
+
+                OnValueChanged(EventArgs.Empty);
             }
         }
         #endregion
@@ -151,7 +151,23 @@ namespace Yahtzee
             }
         }
         #endregion
-        
+
+        #region Public event handlers
+        public delegate void CheckedChangedEventHandler(object sender, EventArgs e);
+        public event CheckedChangedEventHandler CheckedChanged;
+        protected virtual void OnCheckedChanged(EventArgs e)
+        {
+            CheckedChanged?.Invoke(this, e);
+        }
+
+        public delegate void ValueChangedEventHandler(object sender, EventArgs e);
+        public event ValueChangedEventHandler ValueChanged;
+        protected virtual void OnValueChanged(EventArgs e)
+        {
+            ValueChanged?.Invoke(this, e);
+        }
+        #endregion
+
         #region Private events
         private void pnlFace_BackColorChanged(object sender, EventArgs e)
         {

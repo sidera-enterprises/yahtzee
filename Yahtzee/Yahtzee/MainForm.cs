@@ -49,6 +49,8 @@ namespace Yahtzee
                                              _scoreSheet.Margin.Top);
 
             InitializeRolls();
+            SetDiceStatusEffects();
+
             lblStatusMessage.Text = (_players.Length > 1) ? "Okay, " + _scoreSheet.CurrentPlayer
                                                           + ", it's your turn. To begin, please "
                                                           + "roll the dice."
@@ -67,6 +69,18 @@ namespace Yahtzee
                 _touchMode = value;
 
                 // TODO add code here
+            }
+        }
+
+        private Die[] CheckedDice
+        {
+            get
+            {
+                List<Die> l = new List<Die>();
+                foreach (Die d in _dice)
+                    if (d.Checked) l.Add(d);
+
+                return l.ToArray();
             }
         }
         #endregion
@@ -107,6 +121,21 @@ namespace Yahtzee
                                                  : "You are out of rolls. Please click "
                                                  + "one of the above suggested scores "
                                                  + "to continue.";
+        }
+
+        private void SetDiceStatusEffects()
+        {
+            int l = CheckedDice.Length;
+
+            lblDiceCheckedCount.Font = new Font(lblDiceCheckedCount.Font,
+                                                l == 0 ? FontStyle.Italic
+                                                       : FontStyle.Bold);
+
+            lblDiceCheckedCount.Text = (l > 0 ? l.ToString() : "No")
+                                     + (l == 1 ? " die" : " dice")
+                                     + " held.";
+
+            lblDiceCheckedCount.Visible = !AllDiceValuesEqual(0);
         }
 
         //
@@ -313,6 +342,14 @@ namespace Yahtzee
         private bool GameOver()
         {
             return _scoreSheet.GameOver();
+        }
+
+        private bool AllDiceValuesEqual(int value)
+        {
+            foreach (Die d in _dice)
+                if (d.Value != value) return false;
+
+            return true;
         }
         #endregion
 
@@ -569,6 +606,16 @@ namespace Yahtzee
         private void HelpForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             mnuHelp_Help.Enabled = btnHelp.Enabled = true;
+        }
+
+        private void die_CheckedChanged(object sender, EventArgs e)
+        {
+            SetDiceStatusEffects();
+        }
+
+        private void die_ValueChanged(object sender, EventArgs e)
+        {
+            SetDiceStatusEffects();
         }
         #endregion
     }

@@ -104,8 +104,7 @@ namespace Yahtzee
         public event PlayerCountChangedEventHandler PlayerCountChanged;
         protected virtual void OnPlayerCountChanged(EventArgs e)
         {
-            PlayerCountChangedEventHandler handler = PlayerCountChanged;
-            if (handler != null) handler(this, e);
+            PlayerCountChanged?.Invoke(this, e);
         }
         #endregion
 

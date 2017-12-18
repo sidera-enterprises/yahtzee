@@ -828,8 +828,7 @@ namespace Yahtzee
         public event TurnChangedEventHandler TurnChanged;
         protected virtual void OnTurnChanged(EventArgs e)
         {
-            TurnChangedEventHandler handler = TurnChanged;
-            if (handler != null) handler(this, e);
+            TurnChanged?.Invoke(this, e);
         }
         #endregion
 

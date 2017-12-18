@@ -48,20 +48,21 @@
             this.mnuHelp_About = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuStatusBar = new System.Windows.Forms.StatusStrip();
             this.lblStatusMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblDiceCheckedCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlScoreBoard = new System.Windows.Forms.Panel();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlDiceLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.btnRollDice = new System.Windows.Forms.Button();
             this.btnSelectCategory = new System.Windows.Forms.Button();
+            this.pnlOtherControls = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnHelp = new System.Windows.Forms.Button();
+            this.pnlDashboard = new System.Windows.Forms.Panel();
+            this.lblDiv = new System.Windows.Forms.Label();
             this.die1 = new Yahtzee.Die();
             this.die2 = new Yahtzee.Die();
             this.die3 = new Yahtzee.Die();
             this.die4 = new Yahtzee.Die();
             this.die5 = new Yahtzee.Die();
-            this.pnlOtherControls = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnHelp = new System.Windows.Forms.Button();
-            this.pnlDashboard = new System.Windows.Forms.Panel();
-            this.lblDiv = new System.Windows.Forms.Label();
             this.mnuMenuBar.SuspendLayout();
             this.mnuStatusBar.SuspendLayout();
             this.pnlDiceLayout.SuspendLayout();
@@ -186,7 +187,7 @@
             // 
             this.mnuView_TouchMode.CheckOnClick = true;
             this.mnuView_TouchMode.Name = "mnuView_TouchMode";
-            this.mnuView_TouchMode.Size = new System.Drawing.Size(152, 22);
+            this.mnuView_TouchMode.Size = new System.Drawing.Size(141, 22);
             this.mnuView_TouchMode.Text = "&Touch mode";
             this.mnuView_TouchMode.Visible = false;
             this.mnuView_TouchMode.CheckedChanged += new System.EventHandler(this.mnuView_TouchMode_CheckedChanged);
@@ -225,7 +226,8 @@
             // mnuStatusBar
             // 
             this.mnuStatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblStatusMessage});
+            this.lblStatusMessage,
+            this.lblDiceCheckedCount});
             this.mnuStatusBar.Location = new System.Drawing.Point(0, 539);
             this.mnuStatusBar.Name = "mnuStatusBar";
             this.mnuStatusBar.Size = new System.Drawing.Size(684, 22);
@@ -234,8 +236,16 @@
             // lblStatusMessage
             // 
             this.lblStatusMessage.Name = "lblStatusMessage";
-            this.lblStatusMessage.Size = new System.Drawing.Size(85, 17);
+            this.lblStatusMessage.Size = new System.Drawing.Size(560, 17);
+            this.lblStatusMessage.Spring = true;
             this.lblStatusMessage.Text = "StatusMessage";
+            this.lblStatusMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblDiceCheckedCount
+            // 
+            this.lblDiceCheckedCount.Name = "lblDiceCheckedCount";
+            this.lblDiceCheckedCount.Size = new System.Drawing.Size(109, 17);
+            this.lblDiceCheckedCount.Text = "DiceCheckedCount";
             // 
             // pnlScoreBoard
             // 
@@ -309,61 +319,6 @@
             this.btnSelectCategory.Visible = false;
             this.btnSelectCategory.Click += new System.EventHandler(this.btnSelectCategory_Click);
             // 
-            // die1
-            // 
-            this.die1.Checked = false;
-            this.die1.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die1.Location = new System.Drawing.Point(137, 1);
-            this.die1.Margin = new System.Windows.Forms.Padding(1);
-            this.die1.Name = "die1";
-            this.die1.Size = new System.Drawing.Size(66, 66);
-            this.die1.TabIndex = 2;
-            this.die1.Value = 0;
-            // 
-            // die2
-            // 
-            this.die2.Checked = false;
-            this.die2.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die2.Location = new System.Drawing.Point(205, 1);
-            this.die2.Margin = new System.Windows.Forms.Padding(1);
-            this.die2.Name = "die2";
-            this.die2.Size = new System.Drawing.Size(66, 66);
-            this.die2.TabIndex = 3;
-            this.die2.Value = 0;
-            // 
-            // die3
-            // 
-            this.die3.Checked = false;
-            this.die3.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die3.Location = new System.Drawing.Point(273, 1);
-            this.die3.Margin = new System.Windows.Forms.Padding(1);
-            this.die3.Name = "die3";
-            this.die3.Size = new System.Drawing.Size(66, 66);
-            this.die3.TabIndex = 4;
-            this.die3.Value = 0;
-            // 
-            // die4
-            // 
-            this.die4.Checked = false;
-            this.die4.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die4.Location = new System.Drawing.Point(341, 1);
-            this.die4.Margin = new System.Windows.Forms.Padding(1);
-            this.die4.Name = "die4";
-            this.die4.Size = new System.Drawing.Size(66, 66);
-            this.die4.TabIndex = 5;
-            this.die4.Value = 0;
-            // 
-            // die5
-            // 
-            this.die5.Checked = false;
-            this.die5.CheckedColor = System.Drawing.SystemColors.Highlight;
-            this.die5.Location = new System.Drawing.Point(409, 1);
-            this.die5.Margin = new System.Windows.Forms.Padding(1);
-            this.die5.Name = "die5";
-            this.die5.Size = new System.Drawing.Size(66, 66);
-            this.die5.TabIndex = 6;
-            this.die5.Value = 0;
-            // 
             // pnlOtherControls
             // 
             this.pnlOtherControls.AutoSize = true;
@@ -412,6 +367,71 @@
             this.lblDiv.Size = new System.Drawing.Size(684, 2);
             this.lblDiv.TabIndex = 0;
             this.lblDiv.Visible = false;
+            // 
+            // die1
+            // 
+            this.die1.Checked = false;
+            this.die1.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die1.Location = new System.Drawing.Point(137, 1);
+            this.die1.Margin = new System.Windows.Forms.Padding(1);
+            this.die1.Name = "die1";
+            this.die1.Size = new System.Drawing.Size(66, 66);
+            this.die1.TabIndex = 2;
+            this.die1.Value = 0;
+            this.die1.CheckedChanged += new Yahtzee.Die.CheckedChangedEventHandler(this.die_CheckedChanged);
+            this.die1.ValueChanged += new Yahtzee.Die.ValueChangedEventHandler(this.die_ValueChanged);
+            // 
+            // die2
+            // 
+            this.die2.Checked = false;
+            this.die2.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die2.Location = new System.Drawing.Point(205, 1);
+            this.die2.Margin = new System.Windows.Forms.Padding(1);
+            this.die2.Name = "die2";
+            this.die2.Size = new System.Drawing.Size(66, 66);
+            this.die2.TabIndex = 3;
+            this.die2.Value = 0;
+            this.die2.CheckedChanged += new Yahtzee.Die.CheckedChangedEventHandler(this.die_CheckedChanged);
+            this.die2.ValueChanged += new Yahtzee.Die.ValueChangedEventHandler(this.die_ValueChanged);
+            // 
+            // die3
+            // 
+            this.die3.Checked = false;
+            this.die3.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die3.Location = new System.Drawing.Point(273, 1);
+            this.die3.Margin = new System.Windows.Forms.Padding(1);
+            this.die3.Name = "die3";
+            this.die3.Size = new System.Drawing.Size(66, 66);
+            this.die3.TabIndex = 4;
+            this.die3.Value = 0;
+            this.die3.CheckedChanged += new Yahtzee.Die.CheckedChangedEventHandler(this.die_CheckedChanged);
+            this.die3.ValueChanged += new Yahtzee.Die.ValueChangedEventHandler(this.die_ValueChanged);
+            // 
+            // die4
+            // 
+            this.die4.Checked = false;
+            this.die4.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die4.Location = new System.Drawing.Point(341, 1);
+            this.die4.Margin = new System.Windows.Forms.Padding(1);
+            this.die4.Name = "die4";
+            this.die4.Size = new System.Drawing.Size(66, 66);
+            this.die4.TabIndex = 5;
+            this.die4.Value = 0;
+            this.die4.CheckedChanged += new Yahtzee.Die.CheckedChangedEventHandler(this.die_CheckedChanged);
+            this.die4.ValueChanged += new Yahtzee.Die.ValueChangedEventHandler(this.die_ValueChanged);
+            // 
+            // die5
+            // 
+            this.die5.Checked = false;
+            this.die5.CheckedColor = System.Drawing.SystemColors.Highlight;
+            this.die5.Location = new System.Drawing.Point(409, 1);
+            this.die5.Margin = new System.Windows.Forms.Padding(1);
+            this.die5.Name = "die5";
+            this.die5.Size = new System.Drawing.Size(66, 66);
+            this.die5.TabIndex = 6;
+            this.die5.Value = 0;
+            this.die5.CheckedChanged += new Yahtzee.Die.CheckedChangedEventHandler(this.die_CheckedChanged);
+            this.die5.ValueChanged += new Yahtzee.Die.ValueChangedEventHandler(this.die_ValueChanged);
             // 
             // MainForm
             // 
@@ -483,6 +503,7 @@
         private System.Windows.Forms.Label lblDiv;
         private System.Windows.Forms.ToolStripMenuItem mnuView;
         private System.Windows.Forms.ToolStripMenuItem mnuView_TouchMode;
+        private System.Windows.Forms.ToolStripStatusLabel lblDiceCheckedCount;
     }
 }
 
