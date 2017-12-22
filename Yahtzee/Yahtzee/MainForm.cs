@@ -602,9 +602,9 @@ namespace Yahtzee
             System.Diagnostics.Process.Start(_fs.AppDir + "\\help.html");
         }
 
-        private void mnuHelp_Rules_Click(object sender, EventArgs e)
+        private void mnuHelp_Debug_CrashTest_Click(object sender, EventArgs e)
         {
-            // Not yet available in this stage
+            throw new Exception("The user clicked the 'Crash test' option in the 'Debugging tools' menu.");
         }
 
         private void mnuHelp_About_Click(object sender, EventArgs e)

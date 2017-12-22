@@ -248,69 +248,30 @@
             <a name="gameplay-introduction"></a>
             <h2>Introduction</h2>
             <p>
-                <i>Yahtzee!</i> is a game that employs both chance and
-                strategy. By rolling a set of five 6-sided dice, it is up to you
-                how you wish to award your own points based on the combinations
-                you roll.
+                <i>Yahtzee!</i> is a game of chance and skill in which players
+                roll five dice and score as many points as possible given the
+                combinations rolled. The player with the highest grand total
+                score at the end of the game is the winner.
             </p>
             
             <a name="gameplay-adding-removing-players"></a>
             <h2>Adding/Removing Players</h2>
             <p>
                 After starting the application and the splash screen has
-                disappeared, you will be greeted with a dialog box with
+                disappeared, a roster dialog box will appear on the screen with
                 a welcome message and an instruction to add all players who
-                will play the round. To do so, you must click the large plus
-                <b>[+]</b> button on the lower-right side of the dialog box.
-                Each player must be entered with a unique name, each of which
-                may be up to 15 characters in length, and, due to performance
-                limitations (see below for details) up to four players may
-                play in each round. Once you are satisfied with your roster,
-                you may begin playing by clicking the <i>Play!</i> button.
-                Once you do so, the program will generate a score sheet
-                containing score slots for every player entered in the roster.
-                Generating the score sheet may take a moment, depending on
-                the size of the roster and the overall performance of your
-                system.
+                will be playing the game. To do so, click the large plus <b>[+]</b>
+                button on the lower-right side of the dialog box. Each player
+                must be entered with a unique name, each of which may be up to
+                15 characters in length. <b>Due to performance limitations, a
+                maximum of four players may play per given game.</b> Once the
+                player(s) have been added, click the <b>Play!</b> button to
+                initialize the game. Once done, the program will generate a
+                score sheet containing score slots for every player entered in
+                the roster. Generating the score sheet may take a moment,
+                depending on the size of the roster and the overall performance
+                of the system.
             </p>
-
-            <!--
-                <a id="techie-details" href="javascript:setDisplay('big-o', 'block');setDisplay('techie-details', 'none');">
-                    Performance details for nerds
-                </a>
-            </p>
-
-            <div id="big-o" style="display: none; font-style: italic;">
-                <p>
-                    The roster size limit is set to 4 due to a linear
-                    time-efficiency, <b>O(N)</b>.
-                </p>
-
-                <p>
-                    <b>What does this mean?</b>
-                    Here's a tidbit of information about this notation:
-                    
-                    <br><br>
-
-                    Let <b>n</b> represent the number of players in the
-                    roster. For each player added to the roster, <b>m</b> blank
-                    cells are generated in the score sheet, where <b>m</b> is a
-                    constant value corresponding to the number of category labels
-                    as displayed along the first column of the data table.
-                    Since <b>n</b> is a variable and <b>m</b> is a constant, the
-                    function representing the time-efficiency of the score sheet
-                    initialization process is linear, with a slope of <b>m</b>.
-                    The function can be represented as <b>y = mn</b>, which is
-                    represented in Big-O notation as <b>O(N)</b>.
-                </p>
-
-                <p>
-                    Sorry if this explanation bored you out of your wits. Please do
-                    go on to the next part :)
-                </p>
-            </div>
-                
-            -->
 
             <p>
                 The following information outlines action events supported in
@@ -381,12 +342,13 @@
             </p>
             
             <p>
-                If you see a pattern respective to any of the categories you
-                are aiming to fill, you have the beneficial option to hold
-                dice to prevent them from being rolled. <b>You can hold or
-                unhold a die by clicking on it. A held die is indicated by
-                a shaded background color with white dots, while an unheld die
-                is indicated by a white background with black dots.</b>
+                Should a combination pattern respective to any of the categories
+                remaining become apparent, the player has the beneficial option
+                to &quot;hold&quot; any of the dice to prevent them from being
+                rolled again. <b>Dice can be held or unheld at any given time
+                simply by clicking on them. A held die is indicated by a shaded
+                background with white dots, while an unheld die is indicated by
+                a white background with black dots.</b>
             </p>
             
             <a name="gameplay-category-selection"></a>
@@ -402,45 +364,35 @@
             </p>
             
             <p>
-                You cannot select a category before using your first roll.
-                <b>Once you are ready to select a category or have exhausted
-                all your rolls, you can select a category by clicking one of
-                the suggested scores that will temporarily appear on the
-                score sheet, highlighted in red. Once you have done so, the
-                suggestions will disappear and the game will proceed to
-                the next turn.
+                Category selection is unavailable until the player first
+                rolls the dice upon his/her turn. <b>Once the player is ready
+                to select a category or has exhausted all three rolls, the
+                player can select a category by clicking one of the suggested
+                scores that will temporarily appear on the score sheet,
+                highlighted in red. Once done, the suggestions will disappear
+                and the game will proceed to the next player's turn.
             </p>
             
-            <!--p>
-                You cannot select a category before using your first roll.
-                <b>Once you are ready to select a category or have exhausted
-                all your rolls, you can select a category by clicking the
-                <i>Submit</i> button in the dice roller toolbar at the top.
-                A small dialog will appear with a dropdown list of all the
-                categories you have not yet used. Click OK to finalize your
-                selection.</b>
-            </p-->
-            
             <p>
-                If you are playing in a multiplayer setting, your turn will
-                rotate to the next player in the queue once you have selected
-                a category.
+                If the game is in multiplayer mode, the program will select
+                the next player in the queue to take a turn once a player
+                has already played.
             </p>
             
             <a name="gameplay-scoring"></a>
             <h2>Scoring</h2>
             <p>
-                Your score tally will depend on your dice value combination
-                and what category you select based on that combination. If
-                your selected category does not in any way relate to the
-                combination you have rolled, a score of zero (0) points will
-                be awarded to that category. Each category can only be used
-                once per player per round.
+                Each player's score tally will depend on the combination
+                rolled and the category selected based on that combination. If
+                the selected category does not in any way relate to the dice
+                combination, a score of zero (0) points will be awarded to that
+                score slot. Each category can only be used once per player per
+                game.
             </p>
             
             <p>
-                The following information outlines how many points you can
-                earn from the categories you choose:
+                The following information outlines the awards possible under
+                various circumstances:
             </p>
             
             <ul>
@@ -514,17 +466,17 @@
             
             <p>
                 <b>UPPER SECTION TOTAL:</b>
-                If you score 63 or more points in your Upper Section Subtotal,
-                an additional 35-point bonus will be awarded to your Upper
-                Score Total.
+                If a score of 63 points or more is awarded to a player's Upper
+                Section Subtotal, an additional 35-point bonus will be awarded
+                to that player's Upper Score Total.
             </p>
 
             <p>
                 <b>LOWER SECTION TOTAL:</b>
-                * Per traditional game rules, for every subsequent Yahtzee you
-                  roll, an additional 100-point Yahtzee Bonus will be awarded
-                  to your Lower Section Total. However, Yahtzee Bonus is not
-                  currently available in this version of the software.
+                * Per traditional game rules, for every subsequent Yahtzee
+                  rolled, an additional 100-point Yahtzee Bonus will be awarded
+                  to the player's Lower Section Total. However, Yahtzee Bonus is
+                  not currently available in this version of the software.
             </p>
             
             <p><a href="#table-of-contents">&uarr; Table of Contents</a></p>
@@ -552,19 +504,19 @@
                 will display a dialog explaining that the application has
                 crashed and will show technical details describing the
                 cause of the error (this may be useful information for
-                developers). You will be given 20 seconds by default to
+                developers). The user will be given 20 seconds by default to
                 either Restart the application or Terminate it, after which
-                the application will automatically attempt to restart. You
-                may disable the countdown timer by unchecking the <b>Restart
-                automatically</b> checkbox if you wish to keep it open.
+                the application will automatically attempt to restart. To
+                disable the countdown timer and keep the dialog open, uncheck
+                the <b>Restart automatically</b> checkbox.
             </p>
 
             <p>
-                Should you ever be presented with the error dialog, it will
-                generate an error log and save it within the local directory
-                where the executable is located, under
-                <b>\Sidera\Yahtzee\logs</b>. The file will be named with the
-                format <b>errorlogYYYYMMDDHHMMSS.txt</b>, with
+                Should the application ever crash and display this error
+                message dialog, it will generate an error log and save it
+                within the local directory where the executable is located,
+                under <b>\Sidera\Yahtzee\logs</b>. The file will be named with
+                the format <b>errorlogYYYYMMDDHHMMSS.txt</b>, with
                 <b>YYYYMMDDHHMMSS</b> being the error log's timestamp.
             </p>
 

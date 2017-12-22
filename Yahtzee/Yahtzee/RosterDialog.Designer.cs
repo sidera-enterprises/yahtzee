@@ -79,9 +79,9 @@
             this.lblWelcome.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWelcome.Location = new System.Drawing.Point(71, 69);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(349, 24);
+            this.lblWelcome.Size = new System.Drawing.Size(252, 24);
             this.lblWelcome.TabIndex = 3;
-            this.lblWelcome.Text = "Welcome! Who\'s playing this round?";
+            this.lblWelcome.Text = "Welcome! Who\'s playing?";
             // 
             // lblTitle
             // 
@@ -154,7 +154,7 @@
             this.lblInstructions.Location = new System.Drawing.Point(6, 6);
             this.lblInstructions.Margin = new System.Windows.Forms.Padding(6);
             this.lblInstructions.Name = "lblInstructions";
-            this.lblInstructions.Size = new System.Drawing.Size(422, 39);
+            this.lblInstructions.Size = new System.Drawing.Size(421, 39);
             this.lblInstructions.TabIndex = 0;
             this.lblInstructions.Text = resources.GetString("lblInstructions.Text");
             // 

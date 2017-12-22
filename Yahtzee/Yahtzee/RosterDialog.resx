@@ -133,7 +133,7 @@
     <value>17, 17</value>
   </metadata>
   <data name="lblInstructions.Text" xml:space="preserve">
-    <value>To begin, please enter the names of all the players who will be participating in this round by clicking the Add [+] button below. When you are finished, click Play! to proceed.
+    <value>To begin, please enter the names of all the players who will be participating in this game by clicking the Add [+] button below. When you are finished, click Play! to proceed.
 If you need assistance, click the Help button below.</value>
   </data>
   <metadata name="btnQuit.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
